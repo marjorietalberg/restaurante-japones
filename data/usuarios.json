@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nome": "Cliente Demonstração",
+    "email": "cliente@sushihouse.com",
+    "senhaHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "telefone": "(11) 98765-4321",
+    "endereco": "Av. Paulista, 1000 - Apto 42",
+    "role": "cliente"
+  },
+  {
+    "id": 2,
+    "nome": "Administrador Sushi House",
+    "email": "admin@gmail.com",
+    "senhaHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "telefone": "(11) 99999-0000",
+    "endereco": "Sushi House Matriz - Gerência",
+    "role": "admin"
+  },
+  {
+    "id": 3,
+    "nome": "MARJORIE FERNANDES PEDROSO TALBERG",
+    "email": "marjorietalberg1@gmail.com",
+    "senhaHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "telefone": "+5514999048475",
+    "endereco": "",
+    "dataCriacao": "2026-11-10T11:04:56.046Z"
+  }
+]

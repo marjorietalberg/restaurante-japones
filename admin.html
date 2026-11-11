@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo | Sushi House - Sabor do Oriente</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logosushi.png">
+  <link rel="shortcut icon" type="image/png" href="logosushi.png">
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos Gerais -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    body.page-admin-body {
+      margin: 0;
+      padding: 0;
+      background: #080808;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header do Admin */
+    .admin-navbar {
+      background: #0f0f0f;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-brand-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .admin-logo-box {
+      width: 42px;
+      height: 42px;
+      background: #ffb703;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+
+    .admin-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-brand-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .admin-badge-pill {
+      font-size: 0.65rem;
+      background: rgba(255, 183, 3, 0.2);
+      border: 1px solid #ffb703;
+      color: #ffb703;
+      font-weight: 800;
+      padding: 0.15rem 0.5rem;
+      border-radius: 50px;
+      width: fit-content;
+      margin-top: 3px;
+    }
+
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .admin-link-btn {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .admin-link-btn:hover {
+      background: rgba(229, 9, 20, 0.2);
+      color: #ffffff;
+      border-color: #e50914;
+    }
+
+    .btn-logout-admin {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #ef4444;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-logout-admin:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Conteúdo Principal */
+    .admin-main-container {
+      flex: 1;
+      max-width: 1300px;
+      width: 92%;
+      margin: 2.5rem auto 4rem;
+    }
+
+    /* Cards de Estatísticas / KPI */
+    .admin-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .kpi-icon-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
+    /* Abas de Filtros de Status */
+    .filter-tabs-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .filter-tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .filter-tab-btn.active {
+      background: #e50914;
+      color: #fff;
+      border-color: #e50914;
+      box-shadow: 0 4px 14px rgba(229, 9, 20, 0.4);
+    }
+    .filter-tab-badge {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 1px 7px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+    }
+
+    /* Auto-refresh & Indicador */
+    .auto-refresh-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+    }
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      display: inline-block;
+      animation: pulseDot 1.5s infinite;
+    }
+    @keyframes pulseDot {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    /* Zona de Upload de Imagem de Arquivo (Drag and Drop / File Picker) */
+    .upload-dropzone {
+      border: 2px dashed rgba(255, 183, 3, 0.45);
+      background: rgba(255, 183, 3, 0.03);
+      border-radius: 14px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+    }
+    .upload-dropzone:hover, .upload-dropzone.dragover {
+      border-color: #e50914;
+      background: rgba(229, 9, 20, 0.08);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.25);
+      transform: scale(1.01);
+    }
+    .upload-dropzone i.upload-main-icon {
+      font-size: 2.2rem;
+      color: #ffb703;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .upload-dropzone:hover i.upload-main-icon {
+      transform: translateY(-4px);
+      color: #e50914;
+    }
+    .upload-dropzone-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .upload-dropzone-hint {
+      font-size: 0.76rem;
+      color: #888888;
+    }
+
+    /* Card de Preview da Imagem */
+    .image-preview-card {
+      display: none;
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 10px;
+      align-items: center;
+      gap: 14px;
+      animation: modalScale 0.2s ease;
+    }
+    .image-preview-card.visible {
+      display: flex;
+    }
+    .image-preview-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 183, 3, 0.4);
+      background: #000;
+    }
+    .image-preview-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .image-preview-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .image-preview-badge {
+      font-size: 0.72rem;
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+    .btn-trocar-img {
+      background: rgba(255, 183, 3, 0.15);
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      color: #ffb703;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-trocar-img:hover {
+      background: #ffb703;
+      color: #000;
+    }
+    .btn-remove-preview {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-remove-preview:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Chips com Fotos Reais da Casa */
+    .preset-chip-img {
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #eee;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 8px 4px 4px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .preset-chip-img img {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .preset-chip-img:hover {
+      background: #e50914;
+      border-color: #e50914;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Estilo para Impressão de Comanda */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printableReceiptArea, #printableReceiptArea * {
+        visibility: visible !important;
+      }
+      #printableReceiptArea {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 80mm !important;
+        color: #000 !important;
+        background: #fff !important;
+        padding: 10px !important;
+        font-family: 'Courier New', Courier, monospace !important;
+        font-size: 12px !important;
+      }
+    }
+
+    .kpi-card {
+      background: #121212;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 183, 3, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    }
+
+    .kpi-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kpi-label {
+      font-size: 0.82rem;
+      color: #888888;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .kpi-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .kpi-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .kpi-icon-red {
+      background: rgba(229, 9, 20, 0.15);
+      color: #e50914;
+    }
+
+    .kpi-icon-gold {
+      background: rgba(255, 183, 3, 0.15);
+      color: #ffb703;
+    }
+
+    .kpi-icon-green {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .kpi-icon-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+
+    /* Seções do Painel */
+    .admin-section-box {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 2rem 2.2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .btn-refresh {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh:hover {
+      background: #e50914;
+      border-color: #e50914;
+    }
+
+    /* Tabela de Pedidos */
+    .admin-table-responsive {
+      overflow-x: auto;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .admin-table th {
+      background: #181818;
+      color: #888888;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.6px;
+      padding: 1rem 1.2rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .admin-table td {
+      padding: 1.1rem 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #e0e0e0;
+      vertical-align: middle;
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .order-id-badge {
+      font-family: monospace;
+      font-weight: 800;
+      color: #ffb703;
+      background: rgba(255, 183, 3, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 183, 3, 0.25);
+    }
+
+    .status-select {
+      background: #1c1c1c;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .status-select:focus {
+      outline: none;
+      border-color: #e50914;
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+    }
+
+    .status-preparo {
+      background: rgba(255, 183, 3, 0.15);
+      color: #ffb703;
+      border: 1px solid rgba(255, 183, 3, 0.3);
+    }
+
+    .status-recebido {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-rota {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .status-entregue {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Produtos Table */
+    .dish-thumb-mini {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 991px) {
+      .admin-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .admin-navbar {
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .admin-kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .admin-nav-actions span {
+        display: none;
+      }
+      .admin-form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      .admin-modal-content {
+        max-width: 96vw;
+        max-height: 94vh;
+        border-radius: 16px;
+      }
+      .admin-modal-body {
+        padding: 1.2rem;
+      }
+      .admin-modal-header {
+        padding: 1rem 1.2rem;
+      }
+      .admin-modal-footer {
+        padding: 1rem 1.2rem;
+      }
+    }
+    /* Botões de Ação do Admin */
+    .btn-primary-admin {
+      background: #e50914;
+      color: #ffffff;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.6rem 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(229, 9, 20, 0.45);
+    }
+    .btn-primary-admin:hover {
+      background: #ff1f2d;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(229, 9, 20, 0.65);
+    }
+    .btn-action-edit {
+      background: rgba(255, 183, 3, 0.12);
+      color: #ffb703;
+      border: 1px solid rgba(255, 183, 3, 0.3);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .btn-action-edit:hover {
+      background: #ffb703;
+      color: #000;
+    }
+    .btn-action-delete {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+    .btn-action-delete:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+    .btn-action-view {
+      background: rgba(59, 130, 246, 0.12);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-action-view:hover {
+      background: #3b82f6;
+      color: #fff;
+    }
+    .search-filter-input {
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s;
+      min-width: 200px;
+    }
+    .search-filter-input:focus {
+      border-color: #e50914;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+    }
+    /* Estilos do Modal do Admin */
+    .admin-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .admin-modal-backdrop.open {
+      display: flex;
+    }
+    .admin-modal-content {
+      background: #121212;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 650px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+      position: relative;
+      animation: modalScale 0.25s ease;
+    }
+    @keyframes modalScale {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .admin-modal-header {
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-modal-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .admin-modal-body {
+      padding: 1.8rem;
+    }
+    .admin-form-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .admin-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .admin-form-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #bbb;
+    }
+    .admin-input, .admin-select, .admin-textarea {
+      width: 100%;
+      background: #181818;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      box-sizing: border-box;
+      transition: all 0.2s;
+    }
+    .admin-input:focus, .admin-select:focus, .admin-textarea:focus {
+      border-color: #e50914;
+      background: #1f1f1f;
+    }
+    .preset-img-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .preset-chip:hover {
+      background: #e50914;
+      color: #fff;
+      border-color: #e50914;
+    }
+    .admin-modal-footer {
+      padding: 1.2rem 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body class="page-admin-body">
+
+  <!-- Header da Administração -->
+  <header class="admin-navbar">
+    <div class="admin-brand-left">
+      <div class="admin-title-wrap">
+        <span class="admin-brand-name">Sushi House</span>
+        <span class="admin-badge-pill"><i class="fa-solid fa-crown" style="margin-right: 4px;"></i> ADMINISTRADOR</span>
+      </div>
+    </div>
+
+    <div class="admin-nav-actions">
+      <a href="cardapio.html" class="admin-link-btn" target="_blank">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Ver Cardápio</span>
+      </a>
+
+      <a href="index.html" class="admin-link-btn" target="_blank">
+        <i class="fa-solid fa-globe"></i>
+        <span>Ver Site</span>
+      </a>
+
+      <button type="button" class="admin-link-btn btn-logout-admin" onclick="fazerLogoutAdmin()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Sair</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Painel de Controle -->
+  <main class="admin-main-container">
+    
+    <!-- Top KPIs -->
+    <div class="admin-kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-text">
+          <span class="kpi-label">Total de Pedidos</span>
+          <span class="kpi-value" id="kpiTotalPedidos">0</span>
+        </div>
+        <div class="kpi-icon-wrap kpi-icon-blue">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-text">
+          <span class="kpi-label">Faturamento Total</span>
+          <span class="kpi-value" id="kpiFaturamento">R$ 0,00</span>
+        </div>
+        <div class="kpi-icon-wrap kpi-icon-gold">
+          <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-text">
+          <span class="kpi-label">Ticket Médio</span>
+          <span class="kpi-value" id="kpiTicketMedio">R$ 0,00</span>
+        </div>
+        <div class="kpi-icon-wrap kpi-icon-purple">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-text">
+          <span class="kpi-label">Pratos Ativos</span>
+          <span class="kpi-value" id="kpiPratosAtivos">0</span>
+        </div>
+        <div class="kpi-icon-wrap kpi-icon-red">
+          <i class="fa-solid fa-bowl-food"></i>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-text">
+          <span class="kpi-label">Usuários Cadastrados</span>
+          <span class="kpi-value" id="kpiUsuariosCadastrados">0</span>
+        </div>
+        <div class="kpi-icon-wrap kpi-icon-green">
+          <i class="fa-solid fa-users"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção 1: Gestão de Pedidos em Tempo Real -->
+    <section class="admin-section-box">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <i class="fa-solid fa-clipboard-list text-warning"></i>
+          <span>Pedidos do Restaurante (Tempo Real)</span>
+        </h2>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <label class="auto-refresh-wrap" title="Atualiza a lista de pedidos automaticamente a cada 15 segundos">
+            <span class="pulse-dot" id="pulseIndicador"></span>
+            <input type="checkbox" id="checkAutoRefresh" checked onchange="toggleAutoRefresh(this.checked)" style="display:none;">
+            <span id="textoAutoRefresh">Auto-Refresh (15s) Ativo</span>
+          </label>
+          <input type="text" class="search-filter-input" id="searchPedidoInput" placeholder="Buscar pedido por cliente, tel ou ID..." oninput="filtrarPedidosAdmin(this.value)">
+          <button type="button" class="btn-refresh" onclick="carregarPedidosAdmin()">
+            <i class="fa-solid fa-rotate"></i>
+            <span>Atualizar Pedidos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Abas de Filtro por Status do Pedido -->
+      <div class="filter-tabs-row" id="orderFilterTabs">
+        <button type="button" class="filter-tab-btn active" onclick="filtrarStatusPedido('todos', this)">
+          <i class="fa-solid fa-list-check"></i> Todos <span class="filter-tab-badge" id="badgeStatusTodos">0</span>
+        </button>
+        <button type="button" class="filter-tab-btn" onclick="filtrarStatusPedido('Recebido', this)">
+          🔵 Recebidos <span class="filter-tab-badge" id="badgeStatusRecebido">0</span>
+        </button>
+        <button type="button" class="filter-tab-btn" onclick="filtrarStatusPedido('Em Preparo', this)">
+          🟡 Em Preparo <span class="filter-tab-badge" id="badgeStatusEmPreparo">0</span>
+        </button>
+        <button type="button" class="filter-tab-btn" onclick="filtrarStatusPedido('Saiu para Entrega', this)">
+          🟣 A Caminho <span class="filter-tab-badge" id="badgeStatusEntrega">0</span>
+        </button>
+        <button type="button" class="filter-tab-btn" onclick="filtrarStatusPedido('Entregue', this)">
+          🟢 Entregues <span class="filter-tab-badge" id="badgeStatusEntregue">0</span>
+        </button>
+        <button type="button" class="filter-tab-btn" onclick="filtrarStatusPedido('Cancelado', this)">
+          🔴 Cancelados <span class="filter-tab-badge" id="badgeStatusCancelado">0</span>
+        </button>
+      </div>
+
+      <div class="admin-table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data/Hora</th>
+              <th>Cliente</th>
+              <th>Itens do Pedido</th>
+              <th>Total</th>
+              <th>Pagamento</th>
+              <th>Status do Pedido</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="pedidosTableBody">
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 2.5rem; color: #888;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.8rem; color: #ffb703; margin-bottom: 0.8rem;"></i>
+                <p>Carregando pedidos do servidor...</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Seção 2: Pratos do Cardápio (CRUD Completo) -->
+    <section class="admin-section-box">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <i class="fa-solid fa-utensils" style="color: #e50914;"></i>
+          <span>Pratos Cadastrados no Cardápio</span>
+        </h2>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <input type="text" class="search-filter-input" id="searchPratoInput" placeholder="Buscar prato por nome..." oninput="filtrarPratosAdmin()">
+          <select id="filtroCategoriaAdmin" class="search-filter-input" onchange="filtrarPratosAdmin()" style="min-width: 160px;">
+            <option value="todos">Todas Categorias</option>
+            <option value="sushis">Sushis (Geral)</option>
+            <option value="sashimi">Sashimis</option>
+            <option value="uramaki">Uramakis</option>
+            <option value="hot-roll">Hot Rolls</option>
+            <option value="combinados">Combinados</option>
+            <option value="temakis">Temakis</option>
+            <option value="entradas">Entradas</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="sobremesas">Sobremesas</option>
+          </select>
+          <button type="button" class="btn-primary-admin" onclick="abrirModalNovoPrato()">
+            <i class="fa-solid fa-plus"></i>
+            <span>Cadastrar Novo Prato</span>
+          </button>
+          <a href="cardapio.html" target="_blank" class="btn-refresh">
+            <i class="fa-solid fa-eye"></i>
+            <span>Ver Cardápio</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="admin-table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Prato</th>
+              <th>Nome</th>
+              <th>Categoria</th>
+              <th>Preço de Venda</th>
+              <th>Promoção</th>
+              <th>Destaque</th>
+              <th style="text-align: center;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="produtosTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 2rem; color: #888;">Carregando pratos...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Seção 3: Clientes & Usuários Cadastrados -->
+    <section class="admin-section-box">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <i class="fa-solid fa-users" style="color: #22c55e;"></i>
+          <span>Clientes & Usuários Registrados</span>
+        </h2>
+        <button type="button" class="btn-refresh" onclick="carregarUsuariosAdmin()">
+          <i class="fa-solid fa-rotate"></i>
+          <span>Atualizar Usuários</span>
+        </button>
+      </div>
+
+      <div class="admin-table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome Completo</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Perfil</th>
+              <th>Endereço Cadastrado</th>
+            </tr>
+          </thead>
+          <tbody id="usuariosTableBody">
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 2rem; color: #888;">Carregando usuários...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- MODAL 1: CADASTRAR OU EDITAR PRATO NO CARDÁPIO                  -->
+  <!-- ============================================================== -->
+  <div class="admin-modal-backdrop" id="modalProdutoAdmin">
+    <div class="admin-modal-content">
+      <div class="admin-modal-header">
+        <h3 id="modalProdutoTitulo">
+          <i class="fa-solid fa-bowl-food" style="color: #e50914;"></i>
+          <span>Cadastrar Novo Prato</span>
+        </h3>
+        <button type="button" class="btn-refresh" onclick="fecharModalProduto()" style="padding: 0.3rem 0.7rem; border-radius: 50%; font-size: 1.1rem;">&times;</button>
+      </div>
+
+      <form id="formProdutoAdmin" onsubmit="salvarPratoAdmin(event)">
+        <input type="hidden" id="pId">
+        <div class="admin-modal-body">
+          <div class="admin-form-row">
+            <div class="admin-form-group" style="flex: 2;">
+              <label>Nome do Prato *</label>
+              <input type="text" id="pNome" class="admin-input" placeholder="Ex: Uramaki Salmão Especial" required>
+            </div>
+            <div class="admin-form-group" style="flex: 1;">
+              <label>Categoria *</label>
+              <select id="pCategoria" class="admin-select" required>
+                <option value="sushis">Sushis (Geral)</option>
+                <option value="sashimi">Sashimi</option>
+                <option value="uramaki">Uramaki</option>
+                <option value="hot-roll">Hot Roll</option>
+                <option value="temakis">Temakis</option>
+                <option value="combinados">Combinados / Barcas</option>
+                <option value="entradas">Entradas (Shimeji / Ceviche)</option>
+                <option value="sobremesas">Sobremesas</option>
+                <option value="bebidas">Bebidas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>Preço de Venda (R$) *</label>
+              <input type="number" step="0.01" min="0" id="pPreco" class="admin-input" placeholder="Ex: 34.90" required>
+            </div>
+            <div class="admin-form-group">
+              <label>Preço Antigo / Risco (R$) - Opcional</label>
+              <input type="number" step="0.01" min="0" id="pPrecoAntigo" class="admin-input" placeholder="Ex: 45.00 (para promoção)">
+            </div>
+          </div>
+
+          <!-- ============================================================== -->
+          <!-- ÁREA DE UPLOAD E SELEÇÃO DE IMAGEM (ARQUIVO / DRAG & DROP)     -->
+          <!-- ============================================================== -->
+          <div class="admin-form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label style="margin: 0; color: #fff; font-size: 0.85rem; font-weight: 700;">
+                <i class="fa-solid fa-image" style="color: #ffb703; margin-right: 5px;"></i> Imagem do Prato *
+              </label>
+              <span id="uploadStatusBadge" style="font-size: 0.72rem; color: #aaa;">Selecione do PC, arraste ou use a galeria</span>
+            </div>
+
+            <!-- Input File Oculto (acessado pelo botão ou clique no dropzone) -->
+            <input type="file" id="pInputArquivo" accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml" style="display: none;" onchange="tratarSelecaoArquivo(event)">
+
+            <!-- Zona de Arraste e Solte (Dropzone) -->
+            <div class="upload-dropzone" id="uploadDropzone" onclick="abrirSeletorArquivo()" title="Clique para escolher uma imagem do seu computador">
+              <i class="fa-solid fa-cloud-arrow-up upload-main-icon"></i>
+              <div class="upload-dropzone-title">
+                Clique para <strong>escolher arquivo do computador</strong> ou arraste a foto aqui
+              </div>
+              <div class="upload-dropzone-hint">
+                Formatos aceitos: PNG, JPG, JPEG, WEBP ou SVG (Alta resolução)
+              </div>
+            </div>
+
+            <!-- Card de Visualização Prévia da Imagem Selecionada -->
+            <div class="image-preview-card" id="imagePreviewCard">
+              <img id="imgPreviewThumb" src="prato-essencia.jpg" alt="Preview da Imagem" class="image-preview-thumb">
+              <div class="image-preview-info">
+                <span class="image-preview-name" id="imgPreviewNome">prato-essencia.jpg</span>
+                <span class="image-preview-badge" id="imgPreviewStatus">
+                  <i class="fa-solid fa-circle-check"></i> Imagem carregada com sucesso
+                </span>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button type="button" class="btn-trocar-img" onclick="abrirSeletorArquivo()">
+                    <i class="fa-solid fa-folder-open"></i> Trocar Foto
+                  </button>
+                  <button type="button" class="btn-remove-preview" onclick="removerImagemSelecionada()">
+                    <i class="fa-solid fa-trash-can"></i> Limpar Foto
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Opções Alternativas: Fotos da Galeria da Casa ou URL -->
+            <div style="margin-top: 10px;">
+              <details style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px 14px;">
+                <summary style="cursor: pointer; font-size: 0.8rem; color: #ffb703; font-weight: 700; user-select: none;">
+                  <i class="fa-solid fa-images" style="margin-right: 5px;"></i> Fotos Prontas do Restaurante ou Link da Web
+                </summary>
+                
+                <div style="margin-top: 10px;">
+                  <label style="font-size: 0.75rem; color: #aaa;">Caminho ou URL da Imagem:</label>
+                  <input type="text" id="pImagem" class="admin-input" placeholder="Ex: comboshushihome.png ou https://..." oninput="aoMudarInputTextoImagem(this.value)" style="margin-top: 4px; font-size: 0.84rem;" required>
+                </div>
+
+                <div style="margin-top: 10px;">
+                  <span style="font-size: 0.74rem; color: #888; display: block; margin-bottom: 6px;">Clique para usar fotos existentes do restaurante:</span>
+                  <div class="preset-img-chips">
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('cardapio-salmao-especial.jpg', 'Salmão Especial')">
+                      <img src="cardapio-salmao-especial.jpg" alt="Salmão"> <span>Salmão Especial</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('cardapio-temaki-frito.jpg', 'Temaki Frito')">
+                      <img src="cardapio-temaki-frito.jpg" alt="Temaki"> <span>Temaki Frito</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('comboshushihome.png', 'Combo House')">
+                      <img src="comboshushihome.png" alt="Combo"> <span>Combo House</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('cardapio-filadelfia.jpg', 'Uramaki Filadélfia')">
+                      <img src="cardapio-filadelfia.jpg" alt="Uramaki"> <span>Filadélfia</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('cardapio-sushi-atum.jpg', 'Sushi Atum')">
+                      <img src="cardapio-sushi-atum.jpg" alt="Atum"> <span>Sushi Atum</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('banercomboscardapiocelular.png', 'Hot Roll')">
+                      <img src="banercomboscardapiocelular.png" alt="Hot Roll"> <span>Hot Roll</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('combosespeciaisbanner.png', 'Super Combo')">
+                      <img src="combosespeciaisbanner.png" alt="Super Combo"> <span>Super Combo</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('cardapio-yakisoba.jpg', 'Yakisoba Especial')">
+                      <img src="cardapio-yakisoba.jpg" alt="Yakisoba"> <span>Yakisoba</span>
+                    </button>
+                    <button type="button" class="preset-chip-img" onclick="selecionarImgPreset('prato-essencia.jpg', 'Essência da Casa')">
+                      <img src="prato-essencia.jpg" alt="Essência"> <span>Essência</span>
+                    </button>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Descrição do Prato</label>
+            <textarea id="pDescricao" class="admin-textarea" rows="2" placeholder="Descreva os ingredientes frescos, sabor e preparo artesanal..."></textarea>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Detalhes da Porção / Quantidade de Peças</label>
+            <input type="text" id="pDetalhes" class="admin-input" placeholder="Ex: 10 unidades acompanhadas com shoyu e wasabi">
+          </div>
+
+          <div style="display: flex; gap: 24px; margin-top: 10px; flex-wrap: wrap;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #eee; font-size: 0.88rem;">
+              <input type="checkbox" id="pDestaque" style="accent-color: #e50914; width: 18px; height: 18px;">
+              <span>Exibir em Destaque na Home</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: #eee; font-size: 0.88rem;">
+              <input type="checkbox" id="pPromocao" style="accent-color: #ffb703; width: 18px; height: 18px;">
+              <span>Selo de Promoção Especial</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-refresh" onclick="fecharModalProduto()">Cancelar</button>
+          <button type="submit" class="btn-primary-admin" id="btnSalvarPrato">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Salvar Prato no Cardápio</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL 2: DETALHES DO PEDIDO COM ACESSO RÁPIDO AO WHATSAPP      -->
+  <!-- ============================================================== -->
+  <div class="admin-modal-backdrop" id="modalDetalhesPedido">
+    <div class="admin-modal-content">
+      <div class="admin-modal-header">
+        <h3>
+          <i class="fa-solid fa-receipt" style="color: #ffb703;"></i>
+          <span id="detalhePedidoTitulo">Detalhes do Pedido</span>
+        </h3>
+        <button type="button" class="btn-refresh" onclick="fecharModalPedido()" style="padding: 0.3rem 0.7rem; border-radius: 50%; font-size: 1.1rem;">&times;</button>
+      </div>
+      <div class="admin-modal-body" id="detalhesPedidoCorpo"></div>
+      <div class="admin-modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <button type="button" class="btn-refresh" style="background: rgba(255, 183, 3, 0.15); color: #ffb703; border-color: rgba(255, 183, 3, 0.4); font-weight: 700;" onclick="imprimirComandaPedido()">
+          <i class="fa-solid fa-print"></i> <span>Imprimir Comanda (Cozinha/Entrega)</span>
+        </button>
+        <button type="button" class="btn-refresh" onclick="fecharModalPedido()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Área Oculta Formatada para Impressão de Comanda Térmica -->
+  <div id="printableReceiptArea" style="display: none;"></div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPT ADMINISTRATIVO COMPLETO -->
+  <script>
+    let produtosCache = [];
+    let pedidosCache = [];
+    let pedidosAnterioresQtd = 0;
+    let statusFiltroAtual = 'todos';
+    let termoBuscaPedido = '';
+    let autoRefreshTimer = null;
+    let pedidoSelecionadoAtual = null;
+
+    // Estado do Upload de Arquivo
+    let arquivoPendenteUpload = null; // { nome: string, dados: base64DataUrl }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarPedidosAdmin();
+      carregarProdutosAdmin();
+      carregarUsuariosAdmin();
+      iniciarDragAndDropUpload();
+      iniciarAutoRefresh();
+    });
+
+    // ========================================================================
+    // 1. GESTÃO DE IMAGENS DE ARQUIVO (UPLOAD, DRAG & DROP E PREVIEW)
+    // ========================================================================
+    function abrirSeletorArquivo() {
+      const input = document.getElementById('pInputArquivo');
+      if (input) input.click();
+    }
+
+    function iniciarDragAndDropUpload() {
+      const dropzone = document.getElementById('uploadDropzone');
+      if (!dropzone) return;
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.add('dragover');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.remove('dragover');
+        }, false);
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files && files.length > 0) {
+          processarArquivoImagem(files[0]);
+        }
+      }, false);
+    }
+
+    function tratarSelecaoArquivo(event) {
+      const files = event.target.files;
+      if (files && files.length > 0) {
+        processarArquivoImagem(files[0]);
+      }
+    }
+
+    function processarArquivoImagem(file) {
+      if (!file) return;
+
+      // Validação de tipo de arquivo
+      if (!file.type.match(/^image\//)) {
+        showToast('Por favor, selecione apenas arquivos de imagem (PNG, JPG, WEBP, SVG).', 'error');
+        return;
+      }
+
+      // Validação de tamanho (máximo 15MB)
+      if (file.size > 15 * 1024 * 1024) {
+        showToast('A imagem é muito grande. Escolha uma foto de até 15MB.', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      const statusBadge = document.getElementById('uploadStatusBadge');
+      if (statusBadge) statusBadge.innerHTML = `<span style="color: #ffb703;"><i class="fa-solid fa-spinner fa-spin"></i> Lendo arquivo...</span>`;
+
+      reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        arquivoPendenteUpload = {
+          nome: file.name,
+          dados: dataUrl
+        };
+
+        // Atualiza Preview
+        const previewCard = document.getElementById('imagePreviewCard');
+        const thumb = document.getElementById('imgPreviewThumb');
+        const nome = document.getElementById('imgPreviewNome');
+        const status = document.getElementById('imgPreviewStatus');
+        const pImgInput = document.getElementById('pImagem');
+
+        if (thumb) thumb.src = dataUrl;
+        if (nome) nome.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        if (status) status.innerHTML = `<i class="fa-solid fa-circle-check"></i> Imagem do computador pronta para salvar`;
+        if (previewCard) previewCard.classList.add('visible');
+
+        // Atualiza input de texto sincronizado
+        if (pImgInput) pImgInput.value = file.name;
+        if (statusBadge) statusBadge.innerHTML = `<span style="color: #22c55e;"><i class="fa-solid fa-check"></i> Foto pronta</span>`;
+
+        showToast(`Imagem "${file.name}" carregada com sucesso!`, 'success');
+      };
+
+      reader.onerror = function() {
+        showToast('Erro ao carregar o arquivo de imagem.', 'error');
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function removerImagemSelecionada() {
+      arquivoPendenteUpload = null;
+      const input = document.getElementById('pInputArquivo');
+      if (input) input.value = '';
+
+      const pImgInput = document.getElementById('pImagem');
+      if (pImgInput) pImgInput.value = 'comboshushihome.png';
+
+      const thumb = document.getElementById('imgPreviewThumb');
+      const nome = document.getElementById('imgPreviewNome');
+      const status = document.getElementById('imgPreviewStatus');
+      const statusBadge = document.getElementById('uploadStatusBadge');
+
+      if (thumb) thumb.src = 'comboshushihome.png';
+      if (nome) nome.textContent = 'comboshushihome.png';
+      if (status) status.innerHTML = `<i class="fa-solid fa-image"></i> Foto padrão da casa selecionada`;
+      if (statusBadge) statusBadge.textContent = 'Foto padrão selecionada';
+      showToast('Imagem limpa. Selecione um arquivo do computador ou galeria.', 'info');
+    }
+
+    function selecionarImgPreset(imgNome, labelNome) {
+      arquivoPendenteUpload = null;
+      const inputArquivo = document.getElementById('pInputArquivo');
+      if (inputArquivo) inputArquivo.value = '';
+
+      const pImgInput = document.getElementById('pImagem');
+      if (pImgInput) pImgInput.value = imgNome;
+
+      const previewCard = document.getElementById('imagePreviewCard');
+      const thumb = document.getElementById('imgPreviewThumb');
+      const nome = document.getElementById('imgPreviewNome');
+      const status = document.getElementById('imgPreviewStatus');
+      const statusBadge = document.getElementById('uploadStatusBadge');
+
+      if (thumb) thumb.src = imgNome;
+      if (nome) nome.textContent = labelNome ? `${labelNome} (${imgNome})` : imgNome;
+      if (status) status.innerHTML = `<i class="fa-solid fa-check-double"></i> Foto clássica da casa selecionada`;
+      if (previewCard) previewCard.classList.add('visible');
+      if (statusBadge) statusBadge.innerHTML = `<span style="color: #ffb703;"><i class="fa-solid fa-check"></i> Foto da casa</span>`;
+
+      showToast(`Foto "${labelNome || imgNome}" selecionada!`, 'info');
+    }
+
+    function aoMudarInputTextoImagem(valor) {
+      if (!valor) return;
+      arquivoPendenteUpload = null;
+      const thumb = document.getElementById('imgPreviewThumb');
+      const nome = document.getElementById('imgPreviewNome');
+      const previewCard = document.getElementById('imagePreviewCard');
+
+      if (thumb) thumb.src = valor;
+      if (nome) nome.textContent = valor;
+      if (previewCard) previewCard.classList.add('visible');
+    }
+
+    // ========================================================================
+    // 2. GESTÃO DE PEDIDOS EM TEMPO REAL & FILTROS POR STATUS
+    // ========================================================================
+    async function carregarPedidosAdmin(isAutoRefresh = false) {
+      const tbody = document.getElementById('pedidosTableBody');
+      try {
+        const res = await fetch('/api/pedidos');
+        const json = await res.json();
+
+        if (json.sucesso && Array.isArray(json.dados)) {
+          const novosPedidos = json.dados;
+
+          // Se for auto-refresh e tiver pedidos novos, toca o aviso sonoro e avisa
+          if (isAutoRefresh && novosPedidos.length > pedidosAnterioresQtd && pedidosAnterioresQtd > 0) {
+            tocarSinalNovoPedido();
+            showToast('🔔 Novo Pedido Recebido na Cozinha!', 'success');
+          }
+          pedidosAnterioresQtd = novosPedidos.length;
+          pedidosCache = novosPedidos;
+
+          // Atualiza KPIs
+          const totalPedidos = pedidosCache.length;
+          document.getElementById('kpiTotalPedidos').textContent = totalPedidos;
+
+          const faturamento = pedidosCache.reduce((acc, p) => acc + (p.total || 0), 0);
+          document.getElementById('kpiFaturamento').textContent = `R$ ${faturamento.toFixed(2).replace('.', ',')}`;
+
+          const ticketMedio = totalPedidos > 0 ? (faturamento / totalPedidos) : 0;
+          const kpiTicket = document.getElementById('kpiTicketMedio');
+          if (kpiTicket) kpiTicket.textContent = `R$ ${ticketMedio.toFixed(2).replace('.', ',')}`;
+
+          atualizarBadgesFiltroPedidos();
+          renderizarTabelaPedidos();
+        }
+      } catch (err) {
+        console.error('Erro ao buscar pedidos:', err);
+        if (!isAutoRefresh && tbody) {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #ef4444; padding: 2rem;">Falha de comunicação com o servidor.</td></tr>`;
+        }
+      }
+    }
+
+    function atualizarBadgesFiltroPedidos() {
+      const total = pedidosCache.length;
+      const recebidos = pedidosCache.filter(p => (p.status || 'Recebido') === 'Recebido').length;
+      const preparo = pedidosCache.filter(p => p.status === 'Em Preparo').length;
+      const entrega = pedidosCache.filter(p => p.status === 'Saiu para Entrega').length;
+      const entregues = pedidosCache.filter(p => p.status === 'Entregue').length;
+      const cancelados = pedidosCache.filter(p => p.status === 'Cancelado').length;
+
+      const setBadge = (id, count) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = count;
+      };
+
+      setBadge('badgeStatusTodos', total);
+      setBadge('badgeStatusRecebido', recebidos);
+      setBadge('badgeStatusEmPreparo', preparo);
+      setBadge('badgeStatusEntrega', entrega);
+      setBadge('badgeStatusEntregue', entregues);
+      setBadge('badgeStatusCancelado', cancelados);
+    }
+
+    function filtrarStatusPedido(status, btnElement) {
+      statusFiltroAtual = status;
+      document.querySelectorAll('.filter-tab-btn').forEach(b => b.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+      renderizarTabelaPedidos();
+    }
+
+    function filtrarPedidosAdmin(query) {
+      termoBuscaPedido = (query || '').toLowerCase().trim();
+      renderizarTabelaPedidos();
+    }
+
+    function renderizarTabelaPedidos() {
+      const tbody = document.getElementById('pedidosTableBody');
+      if (!tbody) return;
+
+      let filtrados = pedidosCache.filter(p => {
+        const matchStatus = (statusFiltroAtual === 'todos') ? true : (p.status === statusFiltroAtual);
+        const matchBusca = !termoBuscaPedido ||
+          (p.id && String(p.id).toLowerCase().includes(termoBuscaPedido)) ||
+          (p.cliente && p.cliente.nome && p.cliente.nome.toLowerCase().includes(termoBuscaPedido)) ||
+          (p.cliente && p.cliente.telefone && p.cliente.telefone.includes(termoBuscaPedido)) ||
+          (p.formaPagamento && p.formaPagamento.toLowerCase().includes(termoBuscaPedido));
+        return matchStatus && matchBusca;
+      });
+
+      if (filtrados.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 2.5rem; color: #888;">
+          <i class="fa-solid fa-inbox" style="font-size: 2rem; color: #555; margin-bottom: 0.5rem; display: block;"></i>
+          Nenhum pedido encontrado para este filtro.
+        </td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtrados.map(p => {
+        const dataFmt = p.data ? new Date(p.data).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }) : 'Recente';
+        const itensTexto = p.itens ? p.itens.map(i => `${i.quantidade || 1}x ${i.nome}`).join(', ') : 'Itens variados';
+
+        return `
+          <tr>
+            <td><span class="order-id-badge">${p.id}</span></td>
+            <td><small style="color: #999;">${dataFmt}</small></td>
+            <td>
+              <strong>${p.cliente ? p.cliente.nome : 'Cliente'}</strong><br>
+              <small style="color: #888;">${p.cliente ? p.cliente.telefone : ''}</small>
+            </td>
+            <td style="max-width: 250px; font-size: 0.85rem; color: #ccc;">${itensTexto}</td>
+            <td><strong style="color: #22c55e;">R$ ${(p.total || 0).toFixed(2).replace('.', ',')}</strong></td>
+            <td><span style="font-size: 0.85rem; color: #bbb;">${p.formaPagamento || 'PIX'}</span></td>
+            <td>
+              <select class="status-select" onchange="atualizarStatusPedido('${p.id}', this.value)">
+                <option value="Recebido" ${p.status === 'Recebido' ? 'selected' : ''}>🔵 Recebido</option>
+                <option value="Em Preparo" ${p.status === 'Em Preparo' ? 'selected' : ''}>🟡 Em Preparo</option>
+                <option value="Saiu para Entrega" ${p.status === 'Saiu para Entrega' ? 'selected' : ''}>🟣 Saiu para Entrega</option>
+                <option value="Entregue" ${p.status === 'Entregue' ? 'selected' : ''}>🟢 Entregue</option>
+                <option value="Cancelado" ${p.status === 'Cancelado' ? 'selected' : ''}>🔴 Cancelado</option>
+              </select>
+            </td>
+            <td style="white-space: nowrap;">
+              <button type="button" class="btn-action-view" onclick="abrirDetalhesPedido('${p.id}')" title="Ver detalhes completos">
+                <i class="fa-solid fa-eye"></i> Detalhes
+              </button>
+              <button type="button" class="btn-action-delete" onclick="excluirPedidoAdmin('${p.id}')" title="Excluir pedido" style="margin-left: 5px;">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function atualizarStatusPedido(pedidoId, novoStatus) {
+      try {
+        const res = await fetch('/api/pedidos/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: pedidoId, status: novoStatus })
+        });
+        const json = await res.json();
+        if (json.sucesso) {
+          const idx = pedidosCache.findIndex(p => p.id === pedidoId);
+          if (idx !== -1) pedidosCache[idx].status = novoStatus;
+          atualizarBadgesFiltroPedidos();
+          showToast(`Status do Pedido ${pedidoId} alterado para "${novoStatus}"!`, 'success');
+        } else {
+          showToast(json.mensagem || 'Erro ao atualizar status.', 'error');
+        }
+      } catch (err) {
+        showToast('Erro de conexão ao atualizar status.', 'error');
+      }
+    }
+
+    function abrirDetalhesPedido(id) {
+      const pedido = pedidosCache.find(p => p.id === id);
+      if (!pedido) return;
+
+      pedidoSelecionadoAtual = pedido;
+      const modal = document.getElementById('modalDetalhesPedido');
+      const corpo = document.getElementById('detalhesPedidoCorpo');
+      document.getElementById('detalhePedidoTitulo').textContent = `Pedido #${pedido.id}`;
+
+      const itensHtml = (pedido.itens || []).map(i => `
+        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.9rem;">
+          <span>${i.quantidade || 1}x <strong>${i.nome}</strong></span>
+          <span style="color: #ffb703;">R$ ${((i.precoUnitario || 0) * (i.quantidade || 1)).toFixed(2).replace('.', ',')}</span>
+        </div>
+      `).join('');
+
+      const telLimpo = (pedido.cliente && pedido.cliente.telefone) ? pedido.cliente.telefone.replace(/\D/g, '') : '';
+      const whatsBtn = telLimpo ? `
+        <a href="https://wa.me/55${telLimpo}?text=Ol%C3%A1%2C%20falamos%20do%20Sushi%20House%20sobre%20o%20seu%20pedido%20${pedido.id}!" target="_blank" class="btn-refresh" style="background: #25d366; color: #fff; border-color: #25d366; text-decoration: none; margin-top: 8px;">
+          <i class="fa-brands fa-whatsapp"></i> Chamar Cliente no WhatsApp
+        </a>
+      ` : '';
+
+      corpo.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px;">
+            <h4 style="margin: 0 0 6px 0; color: #fff; font-size: 1rem;"><i class="fa-solid fa-user" style="color: #e50914;"></i> Dados do Cliente</h4>
+            <p style="margin: 2px 0; color: #ddd;"><strong>Nome:</strong> ${pedido.cliente ? pedido.cliente.nome : 'Não informado'}</p>
+            <p style="margin: 2px 0; color: #ddd;"><strong>Telefone:</strong> ${pedido.cliente ? pedido.cliente.telefone : 'Não informado'}</p>
+            <p style="margin: 2px 0; color: #ddd;"><strong>Endereço:</strong> ${pedido.endereco ? (typeof pedido.endereco === 'object' ? `${pedido.endereco.rua || ''}, ${pedido.endereco.numero || ''} - ${pedido.endereco.bairro || ''}` : pedido.endereco) : 'Retirada no balcão'}</p>
+            ${pedido.observacoes ? `<p style="margin: 6px 0 0 0; color: #ffb703; font-size: 0.85rem;"><i class="fa-solid fa-comment"></i> Obs: "${pedido.observacoes}"</p>` : ''}
+            ${whatsBtn}
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px;">
+            <h4 style="margin: 0 0 10px 0; color: #fff; font-size: 1rem;"><i class="fa-solid fa-utensils" style="color: #ffb703;"></i> Itens do Pedido</h4>
+            ${itensHtml}
+            <div style="display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); font-weight: 800; font-size: 1.05rem;">
+              <span>Total Pago (${pedido.formaPagamento || 'PIX'}):</span>
+              <span style="color: #22c55e;">R$ ${(pedido.total || 0).toFixed(2).replace('.', ',')}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add('open');
+    }
+
+    function fecharModalPedido() {
+      const modal = document.getElementById('modalDetalhesPedido');
+      if (modal) modal.classList.remove('open');
+      pedidoSelecionadoAtual = null;
+    }
+
+    function imprimirComandaPedido() {
+      const pedido = pedidoSelecionadoAtual;
+      if (!pedido) {
+        showToast('Nenhum pedido selecionado para impressão.', 'error');
+        return;
+      }
+
+      const receipt = document.getElementById('printableReceiptArea');
+      if (!receipt) return;
+
+      const dataFmt = pedido.data ? new Date(pedido.data).toLocaleString('pt-BR') : new Date().toLocaleString('pt-BR');
+      const enderecoFmt = pedido.endereco ? (typeof pedido.endereco === 'object' ? `${pedido.endereco.rua || ''}, ${pedido.endereco.numero || ''} - ${pedido.endereco.bairro || ''} (${pedido.endereco.cidade || 'Garça-SP'})` : pedido.endereco) : 'Retirada no Balcão';
+
+      const linhasItens = (pedido.itens || []).map(i => {
+        const totalItem = ((i.precoUnitario || 0) * (i.quantidade || 1)).toFixed(2).replace('.', ',');
+        return `${String(i.quantidade || 1).padStart(2, ' ')}x ${i.nome.padEnd(20, ' ').substring(0, 20)} R$ ${totalItem}`;
+      }).join('\n');
+
+      receipt.innerHTML = `
+        <pre style="margin: 0; line-height: 1.3;">
+========================================
+             SUSHI HOUSE
+       Autêntico Sabor do Oriente
+========================================
+PEDIDO: #${pedido.id}
+DATA:   ${dataFmt}
+STATUS: ${pedido.status || 'Recebido'}
+----------------------------------------
+CLIENTE:  ${pedido.cliente ? pedido.cliente.nome : 'Cliente'}
+TELEFONE: ${pedido.cliente ? pedido.cliente.telefone : '-'}
+ENTREGA:  ${enderecoFmt}
+${pedido.observacoes ? `OBS:      ${pedido.observacoes}\n` : ''}----------------------------------------
+ITENS DO PEDIDO:
+QTD DESCRIÇÃO            VALOR
+----------------------------------------
+${linhasItens}
+----------------------------------------
+TAXA DE ENTREGA:         R$ 7,00
+TOTAL FINAL:             R$ ${(pedido.total || 0).toFixed(2).replace('.', ',')}
+FORMA DE PAGAMENTO:      ${pedido.formaPagamento || 'PIX'}
+========================================
+   Agradecemos pela preferência! 🥢
+========================================
+        </pre>
+      `;
+
+      window.print();
+    }
+
+    async function excluirPedidoAdmin(id) {
+      if (!confirm(`Deseja realmente excluir o pedido ${id}?`)) return;
+
+      try {
+        const res = await fetch(`/api/pedidos/${id}`, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.sucesso) {
+          showToast(`Pedido ${id} removido.`, 'info');
+          carregarPedidosAdmin();
+        } else {
+          showToast(json.mensagem || 'Erro ao remover pedido.', 'error');
+        }
+      } catch (err) {
+        showToast('Erro de conexão ao remover pedido.', 'error');
+      }
+    }
+
+    // ========================================================================
+    // 3. GESTÃO DE PRATOS (CRUD COMPLETO COM UPLOAD E FILTROS)
+    // ========================================================================
+    async function carregarProdutosAdmin() {
+      const tbody = document.getElementById('produtosTableBody');
+      try {
+        const res = await fetch('/api/produtos');
+        const json = await res.json();
+
+        if (json.sucesso && Array.isArray(json.dados)) {
+          produtosCache = json.dados;
+          document.getElementById('kpiPratosAtivos').textContent = produtosCache.length;
+          filtrarPratosAdmin();
+        }
+      } catch (err) {
+        console.error('Erro ao carregar produtos no admin:', err);
+        if (tbody) tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #ef4444; padding: 2rem;">Falha ao carregar pratos.</td></tr>`;
+      }
+    }
+
+    function renderizarTabelaProdutos(lista) {
+      const tbody = document.getElementById('produtosTableBody');
+      if (!tbody) return;
+
+      if (lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #888;">Nenhum prato encontrado com os filtros atuais.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = lista.map(p => `
+        <tr>
+          <td>
+            <img src="${p.imagem}" alt="${p.nome}" class="dish-thumb-mini" onerror="this.src='prato-essencia.jpg'">
+          </td>
+          <td>
+            <strong>${p.nome}</strong><br>
+            <small style="color: #777;">ID: #${p.id}</small>
+          </td>
+          <td><span style="color: #aaa; text-transform: uppercase; font-size: 0.8rem; font-weight: 700;">${p.categoria}</span></td>
+          <td><strong style="color: #22c55e;">R$ ${(p.preco || 0).toFixed(2).replace('.', ',')}</strong></td>
+          <td>
+            ${p.promocao ? '<span class="status-pill status-preparo">OFERTA</span>' : '<span style="color: #666;">Padrão</span>'}
+          </td>
+          <td>
+            ${p.destaque ? '<span class="status-pill" style="background: rgba(229,9,20,0.15); color: #ff4d4d; border: 1px solid rgba(229,9,20,0.3);">DESTAQUE</span>' : '<span style="color: #666;">-</span>'}
+          </td>
+          <td style="text-align: center; white-space: nowrap;">
+            <button type="button" class="btn-action-edit" onclick="abrirModalEditarPrato(${p.id})" title="Editar prato">
+              <i class="fa-solid fa-pen-to-square"></i> Editar
+            </button>
+            <button type="button" class="btn-action-delete" onclick="excluirPratoAdmin(${p.id}, '${p.nome.replace(/'/g, "\\'")}')" title="Excluir prato" style="margin-left: 4px;">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <a href="produto.html?id=${p.id}" target="_blank" class="btn-action-view" style="margin-left: 4px;" title="Ver detalhes no site">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filtrarPratosAdmin() {
+      const qInput = document.getElementById('searchPratoInput');
+      const catSelect = document.getElementById('filtroCategoriaAdmin');
+      const q = qInput ? qInput.value.toLowerCase().trim() : '';
+      const cat = catSelect ? catSelect.value : 'todos';
+
+      const filtrados = produtosCache.filter(p => {
+        const pCat = (p.categoria || '').toLowerCase();
+        let matchCat = (cat === 'todos');
+        if (!matchCat) {
+          if (cat === 'sushis') {
+            matchCat = ['sushis', 'sashimi', 'uramaki', 'hot-roll'].includes(pCat);
+          } else {
+            matchCat = (pCat === cat.toLowerCase());
+          }
+        }
+        const matchQuery = !q ||
+          (p.nome && p.nome.toLowerCase().includes(q)) ||
+          (p.categoria && p.categoria.toLowerCase().includes(q)) ||
+          (p.descricao && p.descricao.toLowerCase().includes(q));
+        return matchCat && matchQuery;
+      });
+
+      renderizarTabelaProdutos(filtrados);
+    }
+
+    function abrirModalNovoPrato() {
+      document.getElementById('modalProdutoTitulo').innerHTML = `<i class="fa-solid fa-plus-circle" style="color: #e50914;"></i> <span>Cadastrar Novo Prato</span>`;
+      document.getElementById('formProdutoAdmin').reset();
+      document.getElementById('pId').value = '';
+      document.getElementById('pImagem').value = 'comboshushihome.png';
+
+      // Reseta estado do upload de arquivo
+      arquivoPendenteUpload = null;
+      const inputArquivo = document.getElementById('pInputArquivo');
+      if (inputArquivo) inputArquivo.value = '';
+
+      const previewCard = document.getElementById('imagePreviewCard');
+      const thumb = document.getElementById('imgPreviewThumb');
+      const nome = document.getElementById('imgPreviewNome');
+      const status = document.getElementById('imgPreviewStatus');
+      const statusBadge = document.getElementById('uploadStatusBadge');
+
+      if (thumb) thumb.src = 'comboshushihome.png';
+      if (nome) nome.textContent = 'comboshushihome.png (Padrão da Casa)';
+      if (status) status.innerHTML = `<i class="fa-solid fa-image"></i> Escolha um arquivo do computador ou use esta foto padrão`;
+      if (previewCard) previewCard.classList.add('visible');
+      if (statusBadge) statusBadge.textContent = 'Selecione do PC, arraste ou use a galeria';
+
+      document.getElementById('btnSalvarPrato').innerHTML = `<i class="fa-solid fa-plus"></i> <span>Cadastrar Prato</span>`;
+      document.getElementById('modalProdutoAdmin').classList.add('open');
+    }
+
+    function abrirModalEditarPrato(id) {
+      const p = produtosCache.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('modalProdutoTitulo').innerHTML = `<i class="fa-solid fa-pen-to-square" style="color: #ffb703;"></i> <span>Editar Prato #${p.id}</span>`;
+      document.getElementById('pId').value = p.id;
+      document.getElementById('pNome').value = p.nome || '';
+      document.getElementById('pCategoria').value = (p.categoria || 'uramaki').toLowerCase();
+      document.getElementById('pPreco').value = p.preco || '';
+      document.getElementById('pPrecoAntigo').value = p.precoAntigo || '';
+      document.getElementById('pImagem').value = p.imagem || '';
+      document.getElementById('pDescricao').value = p.descricao || '';
+      document.getElementById('pDetalhes').value = p.detalhes || '';
+      document.getElementById('pDestaque').checked = Boolean(p.destaque);
+      document.getElementById('pPromocao').checked = Boolean(p.promocao);
+
+      // Atualiza preview com imagem atual
+      arquivoPendenteUpload = null;
+      const inputArquivo = document.getElementById('pInputArquivo');
+      if (inputArquivo) inputArquivo.value = '';
+
+      const previewCard = document.getElementById('imagePreviewCard');
+      const thumb = document.getElementById('imgPreviewThumb');
+      const nome = document.getElementById('imgPreviewNome');
+      const status = document.getElementById('imgPreviewStatus');
+
+      if (thumb) thumb.src = p.imagem;
+      if (nome) nome.textContent = p.imagem;
+      if (status) status.innerHTML = `<i class="fa-solid fa-check"></i> Foto atual do prato`;
+      if (previewCard) previewCard.classList.add('visible');
+
+      document.getElementById('btnSalvarPrato').innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>Salvar Alterações</span>`;
+      document.getElementById('modalProdutoAdmin').classList.add('open');
+    }
+
+    function fecharModalProduto() {
+      const modal = document.getElementById('modalProdutoAdmin');
+      if (modal) modal.classList.remove('open');
+      arquivoPendenteUpload = null;
+    }
+
+    async function salvarPratoAdmin(e) {
+      e.preventDefault();
+      const id = document.getElementById('pId').value;
+      const btn = document.getElementById('btnSalvarPrato');
+
+      btn.disabled = true;
+
+      let imagemFinal = document.getElementById('pImagem').value.trim() || 'comboshushihome.png';
+
+      // SE HOUVER ARQUIVO DE IMAGEM SELECIONADO DO COMPUTADOR, FAZ O UPLOAD PRIMEIRO
+      if (arquivoPendenteUpload && arquivoPendenteUpload.dados) {
+        btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up fa-spin"></i> Enviando Foto...`;
+        try {
+          const uploadRes = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              nome: arquivoPendenteUpload.nome,
+              dados: arquivoPendenteUpload.dados
+            })
+          });
+
+          const uploadJson = await uploadRes.json();
+          if (uploadJson.sucesso && uploadJson.url) {
+            imagemFinal = uploadJson.url;
+            showToast('Foto salva no servidor com sucesso!', 'success');
+          } else {
+            console.warn('Upload de arquivo respondeu com aviso, usando base64 como fallback:', uploadJson);
+            imagemFinal = arquivoPendenteUpload.dados; // Fallback para manter o dado íntegro
+          }
+        } catch (uploadErr) {
+          console.warn('Falha no upload para /api/upload, usando base64 direto:', uploadErr);
+          imagemFinal = arquivoPendenteUpload.dados;
+        }
+      }
+
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Salvando Prato...`;
+
+      const dados = {
+        nome: document.getElementById('pNome').value.trim(),
+        categoria: document.getElementById('pCategoria').value,
+        preco: parseFloat(document.getElementById('pPreco').value),
+        precoAntigo: document.getElementById('pPrecoAntigo').value ? parseFloat(document.getElementById('pPrecoAntigo').value) : null,
+        imagem: imagemFinal,
+        descricao: document.getElementById('pDescricao').value.trim(),
+        detalhes: document.getElementById('pDetalhes').value.trim(),
+        destaque: document.getElementById('pDestaque').checked,
+        promocao: document.getElementById('pPromocao').checked
+      };
+
+      try {
+        const url = id ? `/api/produtos/${id}` : '/api/produtos';
+        const method = id ? 'PUT' : 'POST';
+
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
+        const json = await res.json();
+
+        if (json.sucesso) {
+          showToast(id ? 'Prato atualizado com sucesso!' : 'Novo prato cadastrado com sucesso no cardápio!', 'success');
+          fecharModalProduto();
+          carregarProdutosAdmin();
+        } else {
+          showToast(json.mensagem || 'Erro ao salvar prato.', 'error');
+        }
+      } catch (err) {
+        showToast('Erro de conexão com o servidor ao salvar prato.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> <span>Salvar Prato no Cardápio</span>`;
+      }
+    }
+
+    async function excluirPratoAdmin(id, nome) {
+      if (!confirm(`Tem certeza que deseja excluir o prato "${nome}" do cardápio?`)) return;
+
+      try {
+        const res = await fetch(`/api/produtos/${id}`, { method: 'DELETE' });
+        const json = await res.json();
+
+        if (json.sucesso) {
+          showToast(`Prato "${nome}" excluído do cardápio!`, 'success');
+          carregarProdutosAdmin();
+        } else {
+          showToast(json.mensagem || 'Erro ao excluir prato.', 'error');
+        }
+      } catch (err) {
+        showToast('Erro de conexão ao excluir prato.', 'error');
+      }
+    }
+
+    // ========================================================================
+    // 4. GESTÃO DE USUÁRIOS
+    // ========================================================================
+    async function carregarUsuariosAdmin() {
+      const tbody = document.getElementById('usuariosTableBody');
+      try {
+        const res = await fetch('/api/usuarios');
+        const json = await res.json();
+
+        if (json.sucesso && Array.isArray(json.dados)) {
+          const usuarios = json.dados;
+          document.getElementById('kpiUsuariosCadastrados').textContent = usuarios.length;
+
+          if (usuarios.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #888;">Nenhum usuário registrado.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = usuarios.map(u => `
+            <tr>
+              <td><span class="order-id-badge">#${u.id}</span></td>
+              <td><strong>${u.nome}</strong></td>
+              <td><span style="color: #bbb;">${u.email}</span></td>
+              <td>${u.telefone || '<small style="color: #666;">Não informado</small>'}</td>
+              <td>
+                ${u.role === 'admin' ? '<span class="status-pill status-preparo"><i class="fa-solid fa-crown"></i> ADMIN</span>' : '<span class="status-pill status-entregue">CLIENTE</span>'}
+              </td>
+              <td><small style="color: #999;">${u.endereco || 'Não cadastrado'}</small></td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Erro ao buscar usuários:', err);
+      }
+    }
+
+    // ========================================================================
+    // 5. AUTO-REFRESH & ALERTA SONORO DE NOVO PEDIDO
+    // ========================================================================
+    function iniciarAutoRefresh() {
+      if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+      autoRefreshTimer = setInterval(() => {
+        const checkbox = document.getElementById('checkAutoRefresh');
+        if (checkbox && checkbox.checked) {
+          carregarPedidosAdmin(true);
+        }
+      }, 15000);
+    }
+
+    function toggleAutoRefresh(ativo) {
+      const dot = document.getElementById('pulseIndicador');
+      const texto = document.getElementById('textoAutoRefresh');
+      if (ativo) {
+        if (dot) dot.style.background = '#22c55e';
+        if (texto) texto.textContent = 'Auto-Refresh (15s) Ativo';
+        showToast('Atualização automática de pedidos ativada.', 'info');
+      } else {
+        if (dot) dot.style.background = '#666';
+        if (texto) texto.textContent = 'Auto-Refresh Pausado';
+        showToast('Atualização automática pausada.', 'info');
+      }
+    }
+
+    function tocarSinalNovoPedido() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        const ctx = new AudioContextClass();
+
+        // Tom 1
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.type = 'triangle';
+        osc1.frequency.setValueAtTime(659.25, ctx.currentTime); // E5
+        gain1.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+        osc1.start(ctx.currentTime);
+        osc1.stop(ctx.currentTime + 0.25);
+
+        // Tom 2 (Harmonia ascendente)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(880.00, ctx.currentTime + 0.15); // A5
+        gain2.gain.setValueAtTime(0.3, ctx.currentTime + 0.15);
+        gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc2.start(ctx.currentTime + 0.15);
+        osc2.stop(ctx.currentTime + 0.5);
+      } catch (e) {
+        console.warn('Áudio não suportado ou bloqueado pelo navegador:', e);
+      }
+    }
+
+    function fazerLogoutAdmin() {
+      localStorage.removeItem('sushi_user');
+      showToast('Logout de Administrador realizado.', 'info');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 700);
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'circle-check' : 'circle-info'}"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

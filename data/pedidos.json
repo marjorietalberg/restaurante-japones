@@ -1,0 +1,98 @@
+[
+  {
+    "id": "PED-604014",
+    "data": "2026-11-10T11:36:44.015Z",
+    "status": "Recebido",
+    "cliente": {
+      "nome": "MARJORIE FERNANDES PEDROSO TALBERG",
+      "telefone": "14999048475"
+    },
+    "endereco": {
+      "rua": "Rua Guido Rejane 74"
+    },
+    "formaPagamento": "PIX",
+    "observacoes": "",
+    "itens": [
+      {
+        "id": 5,
+        "nome": "Yakisoba Carne",
+        "precoUnitario": 39.95,
+        "quantidade": 7,
+        "total": 279.65000000000003
+      },
+      {
+        "id": 2,
+        "nome": "Temaki Frito",
+        "precoUnitario": 45.99,
+        "quantidade": 1,
+        "total": 45.99
+      }
+    ],
+    "subtotal": 325.64,
+    "taxaEntrega": 7,
+    "total": 332.64
+  },
+  {
+    "id": "PED-784210",
+    "data": "2026-11-09T10:15:00.000Z",
+    "status": "Em Preparo",
+    "cliente": {
+      "nome": "Mariana Souza",
+      "telefone": "(14) 99876-5432"
+    },
+    "endereco": {
+      "rua": "Rua das Cerejeiras, 450",
+      "bairro": "Centro",
+      "cidade": "Garça"
+    },
+    "formaPagamento": "PIX",
+    "observacoes": "Caprichar no molho tarê e enviar hashi extra por favor.",
+    "itens": [
+      {
+        "id": 1,
+        "nome": "Salmão Especial",
+        "quantidade": 2,
+        "precoUnitario": 52.99,
+        "subtotal": 105.98
+      },
+      {
+        "id": 3,
+        "nome": "Temaki de Salmão",
+        "quantidade": 1,
+        "precoUnitario": 39.99,
+        "subtotal": 39.99
+      }
+    ],
+    "subtotal": 145.97,
+    "taxaEntrega": 7,
+    "total": 152.97
+  },
+  {
+    "id": "PED-652194",
+    "data": "2026-11-09T09:40:00.000Z",
+    "status": "Recebido",
+    "cliente": {
+      "nome": "Carlos Eduardo M.",
+      "telefone": "(14) 98123-4567"
+    },
+    "endereco": {
+      "rua": "Av. Brasil, 1200 - Apto 31",
+      "bairro": "Jardim Oriental",
+      "cidade": "Garça"
+    },
+    "formaPagamento": "Cartão de Crédito",
+    "observacoes": "Sem gergelim no uramaki.",
+    "itens": [
+      {
+        "id": 12,
+        "nome": "Combo 1 — Clássico",
+        "quantidade": 1,
+        "precoUnitario": 52.99,
+        "subtotal": 52.99
+      }
+    ],
+    "subtotal": 52.99,
+    "taxaEntrega": 7,
+    "total": 59.99
+  }
+]

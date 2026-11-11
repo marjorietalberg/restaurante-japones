@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Digital | Sushi House - Sabor do Oriente</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logosushi.png">
+  <link rel="shortcut icon" type="image/png" href="logosushi.png">
+  
+  <!-- Fontes Google (Poppins, Inter & Cinzel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos da Aplicação -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cardapio.css">
+</head>
+<body class="theme-dark view-desktop page-menu">
+
+  <div class="app-viewport-wrapper">
+    <div class="phone-screen" id="appContent">
+
+      <!-- ============================================================== -->
+      <!-- HEADER / NAVBAR PRINCIPAL                                      -->
+      <!-- ============================================================== -->
+      <header class="main-header" id="navbar">
+        <div class="nav-container">
+          <!-- Nome da Marca (Apenas Texto) -->
+          <a href="index.html" class="brand-logo">
+            <div class="brand-text">
+              <span class="brand-name">Sushi House</span>
+              <span class="brand-slogan">SABOR DO ORIENTE</span>
+            </div>
+          </a>
+
+          <!-- Navegação Centralizada -->
+          <nav class="nav-menu" id="navMenu">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="cardapio.html" class="nav-link active">Cardápio</a>
+            <a href="#promocoes-combos" class="nav-link">Promoções</a>
+            <a href="perfil.html" class="nav-link">Meu Perfil</a>
+          </nav>
+
+          <!-- Ações do Header (Canto Direito) -->
+          <div class="nav-actions">
+            <button type="button" class="cart-trigger-btn" id="cartTriggerBtn" onclick="openCart()" aria-label="Abrir carrinho de compras">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-text">Carrinho</span>
+              <span class="cart-badge" id="cartCountBadge">0</span>
+            </button>
+
+            <div class="user-auth-zone" id="userAuthZone">
+              <button type="button" class="btn-auth-outline" onclick="openAuthModal('login')">Login</button>
+              <button type="button" class="btn-auth-solid" onclick="openAuthModal('register')">Cadastrar</button>
+            </div>
+
+            <!-- Menu Hambúrguer (Mobile) -->
+            <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileNav()">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Drawer do Menu Mobile Lateral (Side Drawer) -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+          <!-- Cabeçalho do Menu Lateral -->
+          <div class="drawer-header-row">
+            <div class="drawer-brand-text">
+              <span class="drawer-brand-name">Sushi House</span>
+              <span class="drawer-badge-pill">MENU</span>
+            </div>
+            <button type="button" class="drawer-close-btn" onclick="toggleMobileNav()" aria-label="Fechar Menu">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div class="mobile-auth-actions" id="mobileAuthActions">
+            <button type="button" class="btn-auth-solid w-100" onclick="openAuthModal('login'); toggleMobileNav();" style="margin-bottom: 6px;">
+              <i class="fa-solid fa-right-to-bracket"></i> Entrar na Conta
+            </button>
+            <button type="button" class="btn-auth-outline w-100" onclick="openAuthModal('register'); toggleMobileNav();">
+              <i class="fa-solid fa-user-plus"></i> Criar Nova Conta
+            </button>
+          </div>
+
+          <nav class="mobile-nav-links">
+            <a href="index.html#home" class="mobile-nav-link">
+              <i class="fa-solid fa-house"></i> <span>Home</span>
+            </a>
+            <a href="cardapio.html" class="mobile-nav-link active">
+              <i class="fa-solid fa-utensils"></i> <span>Cardápio Completo</span>
+            </a>
+            <a href="#promocoes-combos" class="mobile-nav-link" onclick="toggleMobileNav()">
+              <i class="fa-solid fa-fire"></i> <span>Promoções & Combos</span>
+            </a>
+            <a href="sobre.html" class="mobile-nav-link">
+              <i class="fa-solid fa-circle-info"></i> <span>Sobre Nós</span>
+            </a>
+            <a href="perfil.html" class="mobile-nav-link">
+              <i class="fa-solid fa-user-check"></i> <span>Meu Perfil & Clube iFood</span>
+            </a>
+            <a href="sobre.html#contato" class="mobile-nav-link">
+              <i class="fa-solid fa-location-dot"></i> <span>Contato & Localização</span>
+            </a>
+            <a href="javascript:void(0)" class="mobile-nav-link" onclick="openCart(); toggleMobileNav();">
+              <i class="fa-solid fa-bag-shopping"></i> <span>Minha Sacola</span>
+              <span class="cart-badge-mobile" id="mobileCartCountBadge">0</span>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- ============================================================== -->
+      <!-- 1. HERO BANNER: NOSSO CARDÁPIO                                 -->
+      <!-- ============================================================== -->
+      <section class="menu-hero-section">
+        <div class="menu-hero-backdrop"></div>
+        <div class="container menu-hero-container">
+          <div class="menu-hero-text">
+            <h1 class="menu-hero-title">Nosso <span class="text-highlight">Cardápio</span></h1>
+            <p class="menu-hero-desc">
+              Sushis, sashimis, temakis, combinados e muito mais. Escolha o seu favorito!
+            </p>
+            <div class="menu-hero-search-box">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="cardapioSearchInput" placeholder="O que você deseja saborear hoje?" oninput="filterCardapioProducts()">
+            </div>
+          </div>
+
+          <div class="menu-hero-visual">
+            <img src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=700&auto=format&fit=crop&q=85" alt="Niguiri de Salmão Fresco" class="menu-hero-dish-img">
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- 2. SEÇÃO DE CATEGORIAS E PRODUTOS (LAYOUT COM SIDEBAR)         -->
+      <!-- ============================================================== -->
+      <section class="menu-catalog-section" id="catalogo">
+        <div class="container">
+          <div class="menu-layout-grid">
+
+            <!-- Sidebar / Barra de Categorias com Carrossel e Setas -->
+            <aside class="menu-sidebar-col">
+              <div class="sidebar-header-row">
+                <h3 class="sidebar-title"><i class="fa-solid fa-bars-staggered text-highlight"></i> Categorias</h3>
+                <span class="mobile-swipe-hint"><i class="fa-solid fa-arrow-right-arrow-left"></i> Deslize ou use as setas</span>
+              </div>
+              <div class="cat-carousel-wrapper">
+                <button type="button" class="cat-arrow-btn cat-arrow-prev" onclick="scrollCatCarousel(-1)" aria-label="Voltar categorias">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <div class="category-pills-list" id="categoryPillsList">
+                  <button type="button" class="cat-pill-btn active" data-category="todos" onclick="selectCategory('todos', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-utensils cat-icon"></i>
+                      <span class="cat-name">Todos</span>
+                    </span>
+                    <span class="cat-count" id="count-todos">18</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="sushis" onclick="selectCategory('sushis', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-fish-fins cat-icon"></i>
+                      <span class="cat-name">Sushis</span>
+                    </span>
+                    <span class="cat-count" id="count-sushis">0</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="temakis" onclick="selectCategory('temakis', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-pepper-hot cat-icon"></i>
+                      <span class="cat-name">Temakis</span>
+                    </span>
+                    <span class="cat-count" id="count-temakis">0</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="entradas" onclick="selectCategory('entradas', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-bowl-rice cat-icon"></i>
+                      <span class="cat-name">Entradas</span>
+                    </span>
+                    <span class="cat-count" id="count-entradas">0</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="combinados" onclick="selectCategory('combinados', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-layer-group cat-icon"></i>
+                      <span class="cat-name">Combinados</span>
+                    </span>
+                    <span class="cat-count" id="count-combinados">0</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="sobremesas" onclick="selectCategory('sobremesas', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-ice-cream cat-icon"></i>
+                      <span class="cat-name">Sobremesas</span>
+                    </span>
+                    <span class="cat-count" id="count-sobremesas">0</span>
+                  </button>
+                  <button type="button" class="cat-pill-btn" data-category="bebidas" onclick="selectCategory('bebidas', this)">
+                    <span class="cat-main-content">
+                      <i class="fa-solid fa-wine-glass cat-icon"></i>
+                      <span class="cat-name">Bebidas</span>
+                    </span>
+                    <span class="cat-count" id="count-bebidas">0</span>
+                  </button>
+                </div>
+                <button type="button" class="cat-arrow-btn cat-arrow-next" onclick="scrollCatCarousel(1)" aria-label="Avançar categorias">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </aside>
+
+            <!-- Grade Principal de Produtos -->
+            <main class="menu-products-col">
+              <div class="products-grid" id="cardapioProductsGrid">
+                <!-- Renderizado via JavaScript / Backend API -->
+              </div>
+            </main>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- 3. BANNER INTERMEDIÁRIO: PRIMEIRA COMPRA - 10% OFF             -->
+      <!-- ============================================================== -->
+      <section class="banner-discount-section">
+        <div class="container">
+          <div class="discount-banner-card">
+            <div class="discount-content-col">
+              <span class="discount-badge">PRIMEIRA COMPRA</span>
+              <h2 class="discount-title">10% <span class="text-highlight">OFF</span></h2>
+              <div class="discount-subtitle">
+                <i class="fa-solid fa-lock"></i>
+                <span>SEU SUSHI FAVORITO COM UM DESCONTO ESPECIAL!</span>
+              </div>
+              <p class="discount-code-hint">Use o cupom <strong>PRIMEIRASUSHI</strong> no checkout</p>
+            </div>
+
+            <div class="discount-visual-col">
+              <img src="galeria-1.jpg" alt="Barca de Sushis Especiais" class="discount-sushi-img">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- 4. SEÇÃO DE PROMOÇÕES / COMBOS ESPECIAIS                       -->
+      <!-- ============================================================== -->
+      <section class="section-combos-special" id="promocoes-combos">
+        <div class="container">
+          <div class="combos-header">
+            <span class="combos-badge">PROMOÇÕES</span>
+            <h2 class="combos-title">Combos especiais <span class="text-highlight">com muito mais sabor!</span></h2>
+            <p class="combos-subtitle">
+              Aproveite nossas promoções e monte o combo perfeito para o seu momento.
+            </p>
+          </div>
+
+          <div class="combos-cards-grid">
+            <!-- Combo 1 -->
+            <div class="combo-card" style="cursor: pointer;" onclick="window.location.href='produto.html?id=12'">
+              <div class="combo-tag-badge">COMBO 1</div>
+              <div class="combo-img-wrap">
+                <img src="combo-1.jpg" alt="Combo 1 - Clássico" class="combo-img">
+              </div>
+              <div class="combo-body">
+                <h3 class="combo-name">COMBO 1 — CLÁSSICO</h3>
+                <ul class="combo-features">
+                  <li>• 4 sashimis salmão fresco</li>
+                  <li>• 4 uramakis filadélfia</li>
+                  <li>• 4 hossomakis crocantes</li>
+                  <li>• 4 hot rolls especiais</li>
+                </ul>
+                <div class="combo-footer">
+                  <div class="combo-price-box">
+                    <span class="price-current">R$ 52,99</span>
+                    <span class="price-old">R$ 65,00</span>
+                  </div>
+                  <button type="button" class="btn-buy-combo" onclick="event.stopPropagation(); buyCombo(12, 'Combo 1 — Clássico', 52.99, 'combo-1.jpg')">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 2 -->
+            <div class="combo-card" style="cursor: pointer;" onclick="window.location.href='produto.html?id=13'">
+              <div class="combo-tag-badge">COMBO 2</div>
+              <div class="combo-img-wrap">
+                <img src="combo-2.jpg" alt="Combo 2 - Família" class="combo-img">
+              </div>
+              <div class="combo-body">
+                <h3 class="combo-name">COMBO 2 — FAMÍLIA</h3>
+                <ul class="combo-features">
+                  <li>• 10 sashimis variados</li>
+                  <li>• 10 uramakis salmão</li>
+                  <li>• 8 hot rolls crocantes</li>
+                  <li>• 6 niguiris especiais</li>
+                </ul>
+                <div class="combo-footer">
+                  <div class="combo-price-box">
+                    <span class="price-current">R$ 92,99</span>
+                    <span class="price-old">R$ 115,00</span>
+                  </div>
+                  <button type="button" class="btn-buy-combo" onclick="event.stopPropagation(); buyCombo(13, 'Combo 2 — Família', 92.99, 'combo-2.jpg')">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 3 -->
+            <div class="combo-card" style="cursor: pointer;" onclick="window.location.href='produto.html?id=14'">
+              <div class="combo-tag-badge">COMBO 3</div>
+              <div class="combo-img-wrap">
+                <img src="combo-3.jpg" alt="Combo 3 - Especial" class="combo-img">
+              </div>
+              <div class="combo-body">
+                <h3 class="combo-name">COMBO 3 — ESPECIAL</h3>
+                <ul class="combo-features">
+                  <li>• 6 sashimis trufados</li>
+                  <li>• 6 dyo de salmão com geleia</li>
+                  <li>• 8 uramakis especiais</li>
+                  <li>• 4 niguiris selados</li>
+                </ul>
+                <div class="combo-footer">
+                  <div class="combo-price-box">
+                    <span class="price-current">R$ 67,50</span>
+                    <span class="price-old">R$ 80,00</span>
+                  </div>
+                  <button type="button" class="btn-buy-combo" onclick="event.stopPropagation(); buyCombo(14, 'Combo 3 — Especial', 67.50, 'combo-3.jpg')">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combo 4 -->
+            <div class="combo-card" style="cursor: pointer;" onclick="window.location.href='produto.html?id=15'">
+              <div class="combo-tag-badge">COMBO 4</div>
+              <div class="combo-img-wrap">
+                <img src="combo-4.jpg" alt="Combo 4 - Premium" class="combo-img">
+              </div>
+              <div class="combo-body">
+                <h3 class="combo-name">COMBO 4 — PREMIUM</h3>
+                <ul class="combo-features">
+                  <li>• 16 sashimis nobres</li>
+                  <li>• 12 uramakis filadélfia</li>
+                  <li>• 10 hot rolls crocantes</li>
+                  <li>• 8 niguiris maçaricados</li>
+                </ul>
+                <div class="combo-footer">
+                  <div class="combo-price-box">
+                    <span class="price-current">R$ 127,99</span>
+                    <span class="price-old">R$ 145,00</span>
+                  </div>
+                  <button type="button" class="btn-buy-combo" onclick="event.stopPropagation(); buyCombo(15, 'Combo 4 — Premium', 127.99, 'combo-4.jpg')">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- 5. BANNER DE FRETE GRÁTIS                                      -->
+      <!-- ============================================================== -->
+      <section class="banner-shipping-section">
+        <div class="container">
+          <div class="shipping-card-container">
+            <div class="shipping-icon-col">
+              <div class="delivery-moto-icon">
+                <i class="fa-solid fa-motorcycle"></i>
+              </div>
+            </div>
+
+            <div class="shipping-text-col">
+              <h3 class="shipping-title">Frete <span class="text-highlight">Grátis</span></h3>
+              <p class="shipping-subtitle">em pedidos acima de R$ 100,00</p>
+            </div>
+
+            <div class="shipping-action-col">
+              <button type="button" class="btn-shipping-cta" onclick="scrollToCatalog()">
+                <span>Ver Cardápio</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+            <div class="shipping-visual-col">
+              <img src="prato-essencia.jpg" alt="Sushi House Delícias" class="shipping-dish-img">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== -->
+      <!-- 6. RODAPÉ PRINCIPAL                                            -->
+      <!-- ============================================================== -->
+      <footer class="main-footer" id="rodape">
+        <div class="container footer-content-row">
+          <div class="footer-brand-wrap">
+            <img src="logosushi.png" alt="Sushi House" class="footer-logo-img">
+            <div class="footer-brand-text">
+              <span class="brand-name">Sushi House</span>
+              <span class="brand-slogan">SABOR DO ORIENTE</span>
+            </div>
+          </div>
+
+          <nav class="footer-nav-menu">
+            <a href="index.html#home">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+            <a href="#promocoes-combos">Promoções</a>
+            <a href="sobre.html#contato">Contato</a>
+          </nav>
+
+          <div class="footer-social-icons">
+            <a href="https://wa.me/551434060000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://instagram.com/sushihouse.garca" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-seigaiha-pattern">
+          <svg width="100%" height="45" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="seigaiha-menu" width="60" height="30" patternUnits="userSpaceOnUse">
+                <path d="M 30,30 A 25,25 0 0,0 5,30 M 30,30 A 20,20 0 0,0 10,30 M 30,30 A 15,15 0 0,0 15,30 M 30,30 A 10,10 0 0,0 20,30 M 30,30 A 5,5 0 0,0 25,30 M 60,30 A 25,25 0 0,0 35,30 M 60,30 A 20,20 0 0,0 40,30 M 60,30 A 15,15 0 0,0 45,30 M 60,30 A 10,10 0 0,0 50,30 M 60,30 A 5,5 0 0,0 55,30 M 0,30 A 25,25 0 0,0 -25,30 M 0,30 A 20,20 0 0,0 -20,30 M 0,30 A 15,15 0 0,0 -15,30 M 0,30 A 10,10 0 0,0 -10,30 M 0,30 A 5,5 0 0,0 -5,30" fill="none" stroke="#262626" stroke-width="1.6" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="45" fill="url(#seigaiha-menu)" />
+          </svg>
+        </div>
+      </footer>
+
+      <!-- BARRA DE NAVEGAÇÃO INFERIOR FIXA (ESTILO APP MOBILE) -->
+      <nav class="mobile-bottom-tabs" id="mobileBottomTabs">
+        <a href="index.html#home" class="tab-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="cardapio.html" class="tab-item active">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Cardápio</span>
+        </a>
+        <button type="button" class="tab-item" onclick="openCart()">
+          <div class="tab-badge-wrap">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="tab-badge" id="bottomCartBadge">0</span>
+          </div>
+          <span>Sacola</span>
+        </button>
+        <a href="sobre.html" class="tab-item">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Sobre</span>
+        </a>
+        <a href="perfil.html" class="tab-item">
+          <i class="fa-solid fa-user"></i>
+          <span>Perfil</span>
+        </a>
+      </nav>
+
+    </div> <!-- /phone-screen -->
+  </div> <!-- /app-viewport-wrapper -->
+
+
+  <!-- ==================================================================== -->
+  <!-- MODAL DE DETALHES DO PRODUTO (ESTILO MERCADO LIVRE)                  -->
+  <!-- ==================================================================== -->
+  <div class="app-modal" id="modalProductDetails">
+    <div class="modal-backdrop" onclick="closeProductDetails()"></div>
+    <div class="modal-dialog modal-product-details-dialog">
+      <button type="button" class="modal-close-btn p-close-btn" onclick="closeProductDetails()">&times;</button>
+      <div class="product-details-container" id="productDetailsContent">
+        <!-- Preenchido via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================================================================== -->
+  <!-- MODAL / TELA: CARRINHO E CHECKOUT COM SIMULAÇÃO DE CEP E FRETE (IFOOD) -->
+  <!-- ==================================================================== -->
+  <div class="app-modal" id="modalCart">
+    <div class="modal-backdrop" onclick="closeCart()"></div>
+    <div class="modal-dialog modal-cart-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="fa-solid fa-bag-shopping text-highlight"></i>
+          <h3>Sua Sacola de Pedidos</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeCart()">&times;</button>
+      </div>
+
+      <div class="modal-body cart-modal-body">
+
+        <!-- Header do Restaurante no Carrinho (Estilo iFood) -->
+        <div class="cart-restaurant-banner">
+          <img src="logosushi.png" alt="Sushi House" class="cart-rest-logo-img">
+          <div class="cart-rest-info">
+            <h4 class="cart-rest-title">Sushi House - Sabor do Oriente</h4>
+            <span class="cart-rest-meta"><i class="fa-regular fa-clock text-highlight"></i> 30-45 min • <i class="fa-solid fa-star" style="color: #ffb703;"></i> 4.9 • Garça e Região</span>
+          </div>
+        </div>
+
+        <!-- Barra de Frete Grátis Estilo iFood -->
+        <div class="cart-free-shipping-card" id="freeShippingCard">
+          <div class="free-shipping-header">
+            <span><i class="fa-solid fa-motorcycle" style="color: #e50914;"></i> Entrega Sushi House</span>
+            <span id="freeShippingTarget">Frete Grátis acima de R$ 100,00</span>
+          </div>
+          <div class="free-shipping-bar-track">
+            <div class="free-shipping-bar-fill" id="freeShippingBarFill" style="width: 0%;"></div>
+          </div>
+          <p class="free-shipping-status-msg" id="freeShippingStatusMsg">Adicione itens para calcular o frete grátis</p>
+        </div>
+
+        <!-- Lista de Itens no Carrinho (Estilo iFood com fotos e controle +/-) -->
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <!-- Botão Adicionar Mais Itens Estilo iFood -->
+        <div class="cart-add-more-row" id="cartAddMoreRow">
+          <a href="cardapio.html" class="btn-add-more-food" onclick="closeCart()">
+            <i class="fa-solid fa-plus-circle"></i> Adicionar mais itens ao pedido
+          </a>
+        </div>
+
+        <!-- Talheres e Hashi Descartáveis (Estilo iFood) -->
+        <div class="cart-utensils-card" id="cartUtensilsCard">
+          <div class="utensils-text">
+            <i class="fa-solid fa-utensils text-highlight"></i>
+            <div>
+              <strong>Precisa de hashi e shoyu descartáveis?</strong>
+              <small>Economize recursos: marque apenas se for utilizar.</small>
+            </div>
+          </div>
+          <label class="cart-toggle-switch">
+            <input type="checkbox" id="cartNeedUtensils" checked>
+            <span class="cart-toggle-slider"></span>
+          </label>
+        </div>
+
+        <!-- Cupom de Desconto Estilo iFood -->
+        <div class="cart-coupon-section" id="cartCouponSection">
+          <div class="coupon-input-group">
+            <i class="fa-solid fa-ticket text-highlight"></i>
+            <input type="text" id="cartCouponInput" placeholder="Possui cupom? (Ex: SUSHI10, PRIMEIRACOMPRA)">
+            <button type="button" class="btn-apply-coupon" onclick="applyCartCoupon()">Aplicar</button>
+          </div>
+          <div id="appliedCouponFeedback" class="applied-coupon-feedback" style="display: none;"></div>
+        </div>
+
+        <!-- Simulador de CEP e Prazo de Entrega Estilo iFood -->
+        <div class="cart-cep-section">
+          <div class="cart-cep-section-title">
+            <span><i class="fa-solid fa-location-dot" style="color: #e50914;"></i> Simulação de Frete & Entrega (iFood)</span>
+            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">Garça e Região</span>
+          </div>
+          
+          <div class="cep-input-row">
+            <div class="cep-input-wrap">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="cartCepInput" placeholder="Digite seu CEP (ex: 17400-000)" maxlength="9" oninput="handleCepInput(this)" onkeydown="if(event.key==='Enter'){event.preventDefault();consultarCepCart();}">
+            </div>
+            <button type="button" class="btn-calc-cep" onclick="consultarCepCart()">
+              <span>Calcular</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn-use-quick-cep" onclick="preencherCepRapido('17400-000')">
+              <i class="fa-solid fa-bolt"></i> Usar CEP Centro de Garça (17400-000)
+            </button>
+            <button type="button" class="btn-use-quick-cep" onclick="preencherCepRapido('17500-000')">
+              <i class="fa-solid fa-location-arrow"></i> Marília (17500-000)
+            </button>
+          </div>
+
+          <!-- Card de Resultado da Simulação -->
+          <div class="cep-result-card" id="cartCepResultCard">
+            <div class="cep-address-text">
+              <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i>
+              <span id="cepDetectedAddress">Garça - SP (Região Central)</span>
+            </div>
+            <div class="cep-delivery-meta">
+              <span id="cepDetectedEta"><i class="fa-regular fa-clock"></i> Chega em 30 a 45 min</span>
+              <span class="cep-fee-tag" id="cepDetectedFee">R$ 7,00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção de Checkout / Dados de Entrega -->
+        <div class="checkout-form-section" id="checkoutSection">
+          <h4 class="checkout-subheading"><i class="fa-solid fa-user-check"></i> Dados de Entrega</h4>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label>Seu Nome Completo *</label>
+              <input type="text" id="orderClientName" placeholder="Ex: João da Silva" required>
+            </div>
+            <div class="form-group col-6">
+              <label>WhatsApp / Telefone *</label>
+              <input type="text" id="orderClientPhone" placeholder="(14) 99999-9999" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Endereço Completo (Rua, Número, Bairro, Complemento) *</label>
+            <input type="text" id="orderClientAddress" placeholder="Rua das Flores, 123 - Centro, Garça" required>
+          </div>
+          <div class="form-group">
+            <label>Observações do Pedido (Opcional)</label>
+            <input type="text" id="orderNotes" placeholder="Sem gengibre, shoyu extra, troco para R$ 50...">
+          </div>
+
+          <h4 class="checkout-subheading"><i class="fa-solid fa-wallet"></i> Forma de Pagamento</h4>
+          <div class="payment-methods-grid">
+            <label class="payment-card active">
+              <input type="radio" name="paymentMethod" value="PIX" checked onchange="updatePaymentMethodSelection()">
+              <i class="fa-brands fa-pix" style="color: #32bcad; font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">PIX Instantâneo</strong>
+              <small style="color: #22c55e; font-weight: 700;">5% OFF</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Cartão de Crédito" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-credit-card" style="font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">Cartão Online</strong>
+              <small style="color: #888;">Até 3x s/ juros</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Cartão na Entrega" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-receipt" style="font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">Na Entrega</strong>
+              <small style="color: #888;">Maquininha</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Dinheiro" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-money-bill-wave" style="font-size: 1.2rem; color: #22c55e;"></i>
+              <strong style="color: #fff;">Dinheiro</strong>
+              <small style="color: #888;">Levar troco</small>
+            </label>
+          </div>
+        </div>
+
+        <!-- Resumo Financeiro -->
+        <div class="cart-summary-box">
+          <div class="summary-line">
+            <span>Subtotal dos Itens:</span>
+            <span id="cartSubtotal">R$ 0,00</span>
+          </div>
+          <div class="summary-line">
+            <span>Taxa de Entrega (iFood):</span>
+            <span id="cartDelivery">R$ 7,00</span>
+          </div>
+          <div class="summary-line" id="couponDiscountLine" style="display: none; color: #22c55e;">
+            <span>Desconto Cupom:</span>
+            <span id="cartCouponDiscount">- R$ 0,00</span>
+          </div>
+          <div class="summary-line" id="pixDiscountLine" style="display: none; color: #22c55e;">
+            <span>Desconto PIX (5%):</span>
+            <span id="cartPixDiscount">- R$ 0,00</span>
+          </div>
+          <div class="summary-line total-line">
+            <strong>Total Geral:</strong>
+            <strong id="cartTotal" class="text-highlight">R$ 0,00</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="display: flex; gap: 12px; align-items: center; justify-content: space-between;">
+        <button type="button" class="btn-clear-cart" onclick="clearCart()">
+          <i class="fa-regular fa-trash-can"></i> Limpar
+        </button>
+        <button type="button" class="btn-submit-order" id="btnSubmitOrder" onclick="submitOrderToBackend()">
+          <span>Confirmar e Fazer Pedido</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================================================================== -->
+  <!-- MODAL / TELA: AUTENTICAÇÃO (LOGIN & CADASTRO) COM BACKEND             -->
+  <!-- ==================================================================== -->
+  <div class="app-modal" id="modalAuth">
+    <div class="modal-backdrop" onclick="closeAuthModal()"></div>
+    <div class="modal-dialog modal-auth-dialog">
+      <button type="button" class="modal-close-btn auth-close" onclick="closeAuthModal()">&times;</button>
+
+      <div class="auth-layout">
+        <div class="auth-visual-col">
+          <img src="capalogin.png" alt="Login Sushi House" class="auth-banner-img" onerror="this.src='bannercapainicial.png'">
+          <div class="auth-visual-overlay">
+            <h3>Bem-vindo à Experiência Oriental</h3>
+            <p>Faça parte do Sushi Club para acumular pontos e receber promoções exclusivas.</p>
+          </div>
+        </div>
+
+        <div class="auth-form-col">
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Entrar</button>
+            <button type="button" class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">Criar Conta</button>
+          </div>
+
+          <form id="formLogin" class="auth-form active" onsubmit="handleLoginSubmit(event)">
+            <h4 class="form-title">Acesse sua conta</h4>
+            <div class="form-group">
+              <label>E-mail cadastrado</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Senha</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btnLoginSubmit">
+              <span>Entrar no Sushi House</span>
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+
+            <!-- Acesso Direto de Administrador com Senha Padrão -->
+            <div class="modal-admin-access-wrap">
+              <button type="button" class="btn-modal-admin-trigger" onclick="toggleAdminPinModal()">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-shield-halved" style="color: #ffb703; font-size: 1rem;"></i>
+                  <span>Acessar como Administrador</span>
+                </div>
+                <span style="background: rgba(255, 183, 3, 0.2); color: #ffb703; border: 1px solid #ffb703; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 50px;">
+                  <i class="fa-solid fa-crown"></i> ADMIN
+                </span>
+              </button>
+
+              <div id="modalAdminPinBox" class="modal-admin-pin-box" style="display: none;">
+                <p style="margin: 0 0 6px 0; font-size: 0.78rem; color: #ccc;">
+                  <i class="fa-solid fa-key" style="color: #ffb703;"></i> Senha padrão do administrador (<strong>123456</strong>):
+                </p>
+                <div class="modal-admin-pin-row">
+                  <div class="input-with-icon" style="flex: 1;">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="modalAdminPinInput" placeholder="Senha: 123456" value="123456" style="padding: 8px 12px 8px 36px; font-size: 0.82rem;" onkeydown="if(event.key==='Enter'){event.preventDefault();entrarComoAdminModal();}">
+                  </div>
+                  <button type="button" class="btn-modal-admin-pin-submit" id="btnModalAdminPinSubmit" onclick="entrarComoAdminModal()">
+                    <span>Entrar Admin</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form id="formRegister" class="auth-form" onsubmit="handleRegisterSubmit(event)">
+            <h4 class="form-title">Crie sua nova conta</h4>
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="regName" placeholder="Seu nome completo" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="regEmail" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Telefone / WhatsApp</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-phone"></i>
+                <input type="text" id="regPhone" placeholder="(11) 98765-4321">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Senha (mínimo 6 caracteres)</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPassword" placeholder="Crie uma senha forte" minlength="6" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btnRegisterSubmit">
+              <span>Finalizar Cadastro</span>
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </form>
+
+          <div id="userProfileView" class="auth-profile-view" style="display: none;">
+            <div class="profile-header">
+              <div class="profile-avatar"><i class="fa-solid fa-user-check"></i></div>
+              <div class="profile-meta">
+                <h4 id="profName">Nome do Usuário</h4>
+                <p id="profEmail">email@exemplo.com</p>
+              </div>
+            </div>
+            <div class="profile-details">
+              <p><strong>Telefone:</strong> <span id="profPhone">Não informado</span></p>
+              <p><strong>Endereço padrão:</strong> <span id="profAddress">Não informado</span></p>
+            </div>
+            <button type="button" class="btn-logout" onclick="handleLogout()">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair da Conta
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="cardapio.js"></script>
+</body>
+</html>

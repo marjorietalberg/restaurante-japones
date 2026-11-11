@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesse sua Conta | Sushi House - Sabor do Oriente</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logosushi.png">
+  <link rel="shortcut icon" type="image/png" href="logosushi.png">
+  
+  <!-- Fontes Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos Gerais -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Reset e Layout Tela Cheia Total (Full-Bleed Split Screen) */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #080808;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .auth-fullscreen-wrapper {
+      display: flex;
+      width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       LADO ESQUERDO: IMAGEM GIGANTE PEGANDO A TELA TODA (FULL HEIGHT / BLEED)
+       ========================================================================== */
+    .auth-hero-side {
+      flex: 1.15;
+      position: relative;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 100vh;
+    }
+
+    .auth-hero-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.92;
+      transition: transform 0.8s ease;
+    }
+
+    .auth-hero-side:hover .auth-hero-img {
+      transform: scale(1.02);
+    }
+
+    /* Gradiente sobreposto para leitura perfeita dos textos */
+    .auth-hero-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.25) 0%, 
+        rgba(5, 5, 5, 0.45) 45%, 
+        rgba(5, 5, 5, 0.95) 90%, 
+        #080808 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Conteúdo Textual sobre a Imagem */
+    .auth-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 3.5rem 4rem;
+      max-width: 680px;
+    }
+
+    .auth-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(229, 9, 20, 0.2);
+      border: 1px solid #e50914;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+    }
+
+    .auth-hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.15;
+      margin: 0 0 0.9rem 0;
+      letter-spacing: -0.5px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .auth-hero-desc {
+      font-size: 1rem;
+      color: #d1d1d1;
+      line-height: 1.6;
+      margin: 0 0 1.8rem 0;
+      font-weight: 300;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .auth-hero-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .auth-hero-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #e5e5e5;
+      font-weight: 500;
+    }
+
+    .auth-hero-features li i {
+      color: #e50914;
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================================
+       LADO DIREITO: ÁREA DO FORMULÁRIO ESPAÇOSA, ELEGANTE E RESPONSIVA
+       ========================================================================== */
+    .auth-form-side {
+      flex: 1;
+      background: #0d0d0d;
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.8rem 3.5rem;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    /* Barra Superior Direita */
+    .auth-form-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .auth-brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .auth-brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .auth-brand-sub {
+      font-size: 0.65rem;
+      color: #e50914;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .btn-back-menu {
+      color: #a0a0a0;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.55rem 1.2rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-back-menu:hover {
+      color: #ffffff;
+      background: rgba(229, 9, 20, 0.2);
+      border-color: #e50914;
+      transform: translateX(-3px);
+    }
+
+    /* Container Central do Formulário */
+    .auth-form-center-box {
+      width: 100%;
+      max-width: 440px;
+      margin: auto;
+      padding: 1rem 0;
+    }
+
+    /* Abas Selecionadoras */
+    .auth-tabs-row {
+      display: flex;
+      background: #161616;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50px;
+      padding: 5px;
+      gap: 5px;
+      margin-bottom: 2rem;
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      background: transparent;
+      color: #888888;
+      border: none;
+      padding: 11px 0;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .auth-tab-btn:hover {
+      color: #ffffff;
+    }
+
+    .auth-tab-btn.active {
+      background: #e50914;
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(229, 9, 20, 0.55);
+    }
+
+    /* Painéis dos Formulários */
+    .auth-form-panel {
+      display: none;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .auth-form-panel.active {
+      display: flex;
+    }
+
+    .form-heading {
+      margin-bottom: 0.5rem;
+    }
+
+    .form-heading h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 0.35rem 0;
+      letter-spacing: -0.3px;
+    }
+
+    .form-heading p {
+      font-size: 0.9rem;
+      color: #888888;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #b5b5b5;
+    }
+
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-icon i {
+      position: absolute;
+      left: 16px;
+      color: #666666;
+      font-size: 1rem;
+    }
+
+    .input-with-icon input {
+      width: 100%;
+      background: #141414;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 13px 16px 13px 46px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .input-with-icon input:focus {
+      border-color: #e50914;
+      box-shadow: 0 0 16px rgba(229, 9, 20, 0.35);
+      background: #1a1a1a;
+    }
+
+    .btn-auth-submit {
+      margin-top: 0.8rem;
+      background: #e50914;
+      color: #ffffff;
+      border: none;
+      padding: 0.95rem;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+      font-family: inherit;
+    }
+
+    .btn-auth-submit:hover {
+      background: #ff1f2d;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(229, 9, 20, 0.7);
+    }
+
+    .auth-toggle-link {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #888888;
+    }
+
+    .auth-toggle-link a {
+      color: #e50914;
+      text-decoration: none;
+      font-weight: 700;
+      margin-left: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .auth-toggle-link a:hover {
+      color: #ff3333;
+      text-decoration: underline;
+    }
+
+    /* Bloco Acessar Admin com Senha Padrão */
+    .auth-divider-wrap {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.4rem 0 0.9rem;
+    }
+    .auth-divider-wrap::before,
+    .auth-divider-wrap::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .auth-divider-text {
+      padding: 0 12px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #777777;
+      text-transform: uppercase;
+    }
+    .admin-quick-access-box {
+      background: rgba(255, 183, 3, 0.05);
+      border: 1px solid rgba(255, 183, 3, 0.28);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-top: 0.4rem;
+      transition: all 0.3s ease;
+    }
+    .admin-quick-access-box:hover {
+      border-color: rgba(255, 183, 3, 0.55);
+      background: rgba(255, 183, 3, 0.09);
+    }
+    .btn-admin-access-full {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 6px 2px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .btn-admin-access-full:hover {
+      color: #ffb703;
+    }
+    .admin-badge-label {
+      background: rgba(255, 183, 3, 0.22);
+      color: #ffb703;
+      border: 1px solid #ffb703;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+    }
+    .admin-pin-expand {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      animation: fadeIn 0.25s ease;
+    }
+    .admin-pin-desc {
+      font-size: 0.82rem;
+      color: #cccccc;
+      margin: 0 0 10px 0;
+    }
+    .admin-pin-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-admin-submit-pin {
+      background: #ffb703;
+      color: #000000;
+      border: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .btn-admin-submit-pin:hover {
+      background: #ffa700;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(255, 183, 3, 0.4);
+    }
+    .admin-pin-hint {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #999999;
+      line-height: 1.4;
+    }
+
+    /* Rodapé da Área Direita */
+    .auth-form-footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555555;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================================================
+       RESPONSIVIDADE (MOBILE & TABLETS)
+       ========================================================================== */
+    @media (max-width: 991px) {
+      .auth-fullscreen-wrapper {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+
+      .auth-hero-side {
+        flex: none;
+        width: 100%;
+        min-height: 320px;
+        max-height: 360px;
+      }
+
+      .auth-hero-content {
+        padding: 2rem 1.8rem;
+      }
+
+      .auth-hero-title {
+        font-size: 1.8rem;
+      }
+
+      .auth-hero-desc {
+        display: none;
+      }
+
+      .auth-hero-features {
+        display: none;
+      }
+
+      .auth-form-side {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 2rem 1.5rem;
+        min-height: auto;
+      }
+
+      .auth-form-center-box {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .auth-hero-side {
+        min-height: 240px;
+      }
+      .auth-hero-title {
+        font-size: 1.5rem;
+      }
+      .auth-form-side {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-fullscreen-wrapper">
+
+    <!-- ==================================================================== -->
+    <!-- 1. LADO ESQUERDO: IMAGEM GIGANTE PEGANDO A TELA INTEIRA (100% ALTURA) -->
+    <!-- ==================================================================== -->
+    <section class="auth-hero-side">
+      <img src="capalogin.png" alt="Sushi House - Experiência Oriental" class="auth-hero-img" onerror="this.src='bannercapainicial.png'">
+      <div class="auth-hero-gradient"></div>
+
+      <div class="auth-hero-content">
+        <span class="auth-badge-tag">
+          <i class="fa-solid fa-torii-gate"></i> SABOR DO ORIENTE
+        </span>
+        <h1 class="auth-hero-title">Bem-vindo à Experiência Oriental</h1>
+        <p class="auth-hero-desc">
+          Tradição milenar, ingredientes nobres e a mais autêntica culinária japonesa em cada detalhe. Faça parte do Sushi Club e aproveite vantagens exclusivas.
+        </p>
+
+        <ul class="auth-hero-features">
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Salmão e atum frescos selecionados diariamente</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Cortes tradicionais e receitas artesanais do sushiman</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Delivery rápido e embalagens térmicas de alta qualidade</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- 2. LADO DIREITO: FORMULÁRIO COMPLETO, ESPAÇOSO E PROFISSIONAL        -->
+    <!-- ==================================================================== -->
+    <section class="auth-form-side">
+      
+      <!-- Topbar com Logo e Botão Voltar -->
+      <div class="auth-form-topbar">
+        <a href="index.html" class="auth-brand-logo">
+          <div>
+            <div class="auth-brand-name">Sushi House</div>
+            <div class="auth-brand-sub">SABOR DO ORIENTE</div>
+          </div>
+        </a>
+
+        <a href="cardapio.html" class="btn-back-menu">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Voltar ao Cardápio</span>
+        </a>
+      </div>
+
+      <!-- Caixa Centralizada do Formulário -->
+      <div class="auth-form-center-box">
+        
+        <!-- Abas: Entrar | Criar Conta -->
+        <div class="auth-tabs-row">
+          <button type="button" class="auth-tab-btn active" id="tabLoginBtn" onclick="switchTab('login')">
+            <i class="fa-solid fa-right-to-bracket"></i> Entrar
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabRegisterBtn" onclick="switchTab('register')">
+            <i class="fa-solid fa-user-plus"></i> Criar Conta
+          </button>
+        </div>
+
+        <!-- FORMULÁRIO 1: LOGIN (CLIENTE OU ADMIN) -->
+        <form id="formLogin" class="auth-form-panel active" onsubmit="handleLoginSubmit(event)">
+          <div class="form-heading">
+            <h2>Acesse sua conta</h2>
+            <p>Entre com seu e-mail e senha para fazer pedidos e acompanhar entregas.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="loginEmail">E-mail cadastrado</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="seu@email.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Senha de acesso</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-auth-submit" id="btnLoginSubmit">
+            <span>Entrar no Sushi House</span>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </button>
+
+          <!-- Acesso Direto de Administrador com Senha Padrão -->
+          <div class="auth-divider-wrap">
+            <span class="auth-divider-text">ACESSO DE GERENCIAMENTO</span>
+          </div>
+
+          <div class="admin-quick-access-box">
+            <button type="button" class="btn-admin-access-full" onclick="toggleAdminPinBox()">
+              <span style="display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-shield-halved" style="color: #ffb703; font-size: 1.1rem;"></i>
+                <strong>Acessar como Administrador</strong>
+              </span>
+              <span class="admin-badge-label"><i class="fa-solid fa-crown" style="margin-right: 3px;"></i> PAINEL ADMIN</span>
+            </button>
+
+            <!-- Painel Expansível de Senha Padrão do Admin -->
+            <div class="admin-pin-expand" id="adminPinExpand" style="display: none;">
+              <p class="admin-pin-desc">
+                <i class="fa-solid fa-key" style="color: #ffb703;"></i>
+                Digite a senha padrão de administrador para gerenciar o restaurante:
+              </p>
+              <div class="admin-pin-row">
+                <div class="input-with-icon" style="flex: 1;">
+                  <i class="fa-solid fa-lock"></i>
+                  <input type="password" id="adminPinInput" placeholder="Senha padrão (123456)" value="123456" onkeydown="if(event.key==='Enter'){event.preventDefault();entrarComoAdminPin();}">
+                </div>
+                <button type="button" class="btn-admin-submit-pin" id="btnAdminPinSubmit" onclick="entrarComoAdminPin()">
+                  <span>Entrar Admin</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <small class="admin-pin-hint">
+                <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> Senha padrão configurada: <strong>123456</strong> (E-mail: <code>admin@gmail.com</code>)
+              </small>
+            </div>
+          </div>
+
+          <div class="auth-toggle-link" style="margin-top: 1rem;">
+            Não tem uma conta ainda? <a href="javascript:void(0)" onclick="switchTab('register')">Cadastre-se aqui</a>
+          </div>
+        </form>
+
+        <!-- FORMULÁRIO 2: CADASTRO COMPLETO (CRIAR CONTA) -->
+        <form id="formRegister" class="auth-form-panel" onsubmit="handleRegisterSubmit(event)">
+          <div class="form-heading">
+            <h2>Crie sua nova conta</h2>
+            <p>Cadastre-se para acumular pontos no Sushi Club e fazer pedidos delivery.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="regName">Nome Completo</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="regName" placeholder="Seu nome completo" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">E-mail</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" id="regEmail" placeholder="seu@email.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regPhone">Telefone / WhatsApp</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-phone"></i>
+              <input type="tel" id="regPhone" placeholder="(14) 99876-5432" required autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Senha (mínimo 6 caracteres)</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="regPassword" placeholder="Crie uma senha forte" minlength="6" required autocomplete="new-password">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-auth-submit" id="btnRegisterSubmit">
+            <span>Finalizar Cadastro</span>
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+
+          <div class="auth-toggle-link">
+            Já possui uma conta? <a href="javascript:void(0)" onclick="switchTab('login')">Entrar</a>
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Rodapé Direita -->
+      <footer class="auth-form-footer">
+        <p>© 2026 Sushi House - Sabor do Oriente | Garça - SP</p>
+      </footer>
+
+    </section>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // Inicialização da aba via URL (?tab=login ou ?tab=register)
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tab = urlParams.get('tab') || 'login';
+      switchTab(tab);
+    });
+
+    function switchTab(tab) {
+      const tabLoginBtn = document.getElementById('tabLoginBtn');
+      const tabRegBtn = document.getElementById('tabRegisterBtn');
+      const formLogin = document.getElementById('formLogin');
+      const formReg = document.getElementById('formRegister');
+
+      if (tab === 'login') {
+        tabLoginBtn.classList.add('active');
+        tabRegBtn.classList.remove('active');
+        formLogin.classList.add('active');
+        formReg.classList.remove('active');
+      } else {
+        tabRegBtn.classList.add('active');
+        tabLoginBtn.classList.remove('active');
+        formReg.classList.add('active');
+        formLogin.classList.remove('active');
+      }
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const senha = document.getElementById('loginPassword').value.trim();
+      const btn = document.getElementById('btnLoginSubmit');
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Autenticando...`;
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.sucesso) {
+          localStorage.setItem('sushi_user', JSON.stringify(data.dados));
+          
+          // Se for Administrador (admin@gmail.com)
+          if (data.dados.role === 'admin' || email.toLowerCase() === 'admin@gmail.com') {
+            showToast('Login de Administrador confirmado! Redirecionando ao painel...', 'success');
+            setTimeout(() => {
+              window.location.href = 'admin.html';
+            }, 750);
+          } else {
+            showToast(`Bem-vindo de volta, ${data.dados.nome}!`, 'success');
+            setTimeout(() => {
+              window.location.href = 'perfil.html';
+            }, 750);
+          }
+        } else {
+          showToast(data.mensagem || 'E-mail ou senha inválidos.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = `<span>Entrar no Sushi House</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>`;
+        }
+      } catch (err) {
+        // Fallback local se o servidor estiver offline
+        if (email.toLowerCase() === 'admin@gmail.com' && senha === '123456') {
+          localStorage.setItem('sushi_user', JSON.stringify({ id: 2, nome: 'Administrador', email: 'admin@gmail.com', role: 'admin' }));
+          showToast('Login de Administrador confirmado! Abrindo painel...', 'success');
+          setTimeout(() => { window.location.href = 'admin.html'; }, 750);
+        } else {
+          showToast('Falha na comunicação com o servidor.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = `<span>Entrar no Sushi House</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>`;
+        }
+      }
+    }
+
+    async function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const nome = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const telefone = document.getElementById('regPhone').value.trim();
+      const senha = document.getElementById('regPassword').value.trim();
+      const btn = document.getElementById('btnRegisterSubmit');
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Criando conta...`;
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, email, telefone, senha })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.sucesso) {
+          localStorage.setItem('sushi_user', JSON.stringify(data.dados));
+          showToast(`Conta criada com sucesso! Bem-vindo, ${data.dados.nome}!`, 'success');
+          setTimeout(() => {
+            window.location.href = 'perfil.html';
+          }, 800);
+        } else {
+          showToast(data.mensagem || 'Erro ao realizar cadastro.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = `<span>Finalizar Cadastro</span> <i class="fa-solid fa-user-plus"></i>`;
+        }
+      } catch (err) {
+        showToast('Falha na comunicação com o servidor.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = `<span>Finalizar Cadastro</span> <i class="fa-solid fa-user-plus"></i>`;
+      }
+    }
+
+    function toggleAdminPinBox() {
+      const panel = document.getElementById('adminPinExpand');
+      if (!panel) return;
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      if (panel.style.display === 'block') {
+        const input = document.getElementById('adminPinInput');
+        if (input) input.focus();
+      }
+    }
+
+    async function entrarComoAdminPin() {
+      const pin = document.getElementById('adminPinInput').value.trim();
+      const btn = document.getElementById('btnAdminPinSubmit');
+      if (!pin) {
+        showToast('Digite a senha padrão do administrador (123456)', 'error');
+        return;
+      }
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Entrando...`;
+
+      try {
+        const res = await fetch('/api/auth/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ senha: pin })
+        });
+        const data = await res.json();
+        if (res.ok && data.sucesso) {
+          localStorage.setItem('sushi_user', JSON.stringify(data.dados));
+          showToast('Acesso de Administrador confirmado! Abrindo painel...', 'success');
+          setTimeout(() => {
+            window.location.href = 'admin.html';
+          }, 600);
+        } else {
+          showToast(data.mensagem || 'Senha padrão incorreta.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = `<span>Entrar Admin</span> <i class="fa-solid fa-arrow-right"></i>`;
+        }
+      } catch (err) {
+        // Fallback offline se o fetch falhar
+        if (pin === '123456') {
+          localStorage.setItem('sushi_user', JSON.stringify({
+            id: 99,
+            nome: 'Administrador Sushi House',
+            email: 'admin@gmail.com',
+            role: 'admin'
+          }));
+          showToast('Acesso de Administrador confirmado! Abrindo painel...', 'success');
+          setTimeout(() => { window.location.href = 'admin.html'; }, 600);
+        } else {
+          showToast('Falha na conexão com o servidor.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = `<span>Entrar Admin</span> <i class="fa-solid fa-arrow-right"></i>`;
+        }
+      }
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'circle-check' : 'circle-xmark'}"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>

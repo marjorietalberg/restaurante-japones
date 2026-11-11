@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil & Clube de Benefícios | Sushi House</title>
+  
+  <!-- Favicon na aba do navegador -->
+  <link rel="icon" type="image/png" href="logosushi.png">
+  <link rel="shortcut icon" type="image/png" href="logosushi.png">
+  
+  <!-- Fontes Google & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Estilos Globais e do Perfil -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="perfil.css">
+</head>
+<body class="theme-dark view-desktop page-profile">
+
+  <div class="app-viewport-wrapper">
+    <div class="phone-screen" id="appContent">
+
+      <!-- ============================================================== -->
+      <!-- HEADER / NAVBAR PRINCIPAL                                      -->
+      <!-- ============================================================== -->
+      <header class="main-header" id="navbar">
+        <div class="nav-container">
+          <!-- Nome da Marca (Apenas Texto) -->
+          <a href="index.html" class="brand-logo">
+            <div class="brand-text">
+              <span class="brand-name">Sushi House</span>
+              <span class="brand-slogan">SABOR DO ORIENTE</span>
+            </div>
+          </a>
+
+          <!-- Navegação Centralizada -->
+          <nav class="nav-menu" id="navMenu">
+            <a href="index.html#home" class="nav-link">Home</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="cardapio.html" class="nav-link">Cardápio</a>
+            <a href="cardapio.html#promocoes-combos" class="nav-link">Promoções</a>
+            <a href="perfil.html" class="nav-link active">Meu Perfil</a>
+          </nav>
+
+          <!-- Ações do Header -->
+          <div class="nav-actions">
+            <button type="button" class="cart-trigger-btn" id="cartTriggerBtn" onclick="openCart()" aria-label="Abrir carrinho de compras">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-text">Carrinho</span>
+              <span class="cart-badge" id="cartCountBadge">0</span>
+            </button>
+
+            <div class="user-auth-zone" id="userAuthZone">
+              <button type="button" class="btn-auth-outline" onclick="openAuthModal('login')">Login</button>
+              <button type="button" class="btn-auth-solid" onclick="openAuthModal('register')">Cadastrar</button>
+            </div>
+
+            <!-- Botão Menu Mobile -->
+            <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileNav()" aria-label="Menu Mobile">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Drawer do Menu Mobile Lateral (Side Drawer) -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+          <!-- Cabeçalho do Menu Lateral -->
+          <div class="drawer-header-row">
+            <div class="drawer-brand-text">
+              <span class="drawer-brand-name">Sushi House</span>
+              <span class="drawer-badge-pill">MENU</span>
+            </div>
+            <button type="button" class="drawer-close-btn" onclick="toggleMobileNav()" aria-label="Fechar Menu">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div class="mobile-auth-actions" id="mobileAuthActions"></div>
+
+          <nav class="mobile-nav-links">
+            <a href="index.html#home" class="mobile-nav-link">
+              <i class="fa-solid fa-house"></i> <span>Home</span>
+            </a>
+            <a href="cardapio.html" class="mobile-nav-link">
+              <i class="fa-solid fa-utensils"></i> <span>Cardápio Completo</span>
+            </a>
+            <a href="cardapio.html#promocoes-combos" class="mobile-nav-link">
+              <i class="fa-solid fa-fire"></i> <span>Promoções & Combos</span>
+            </a>
+            <a href="sobre.html" class="mobile-nav-link">
+              <i class="fa-solid fa-circle-info"></i> <span>Sobre Nós</span>
+            </a>
+            <a href="perfil.html" class="mobile-nav-link active">
+              <i class="fa-solid fa-user-check"></i> <span>Meu Perfil & Clube iFood</span>
+            </a>
+            <a href="sobre.html#contato" class="mobile-nav-link">
+              <i class="fa-solid fa-location-dot"></i> <span>Contato & Localização</span>
+            </a>
+            <a href="javascript:void(0)" class="mobile-nav-link" onclick="openCart(); toggleMobileNav();">
+              <i class="fa-solid fa-bag-shopping"></i> <span>Minha Sacola</span>
+              <span class="cart-badge-mobile" id="mobileCartCountBadge">0</span>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- ============================================================== -->
+      <!-- CONTEÚDO PRINCIPAL: PERFIL DE USUÁRIO ESTILO IFOOD             -->
+      <!-- ============================================================== -->
+      <main class="profile-main-wrap">
+        
+        <!-- Breadcrumbs -->
+        <div class="profile-breadcrumbs">
+          <a href="index.html">Home</a>
+          <span style="color: #555;">/</span>
+          <span class="current">Perfil de Usuário & Clube de Benefícios</span>
+        </div>
+
+        <!-- Card Hero do Perfil -->
+        <div class="profile-hero-card">
+          <div class="profile-cover-strip"></div>
+          
+          <div class="profile-header-content">
+            <div class="profile-avatar-block">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div class="profile-avatar-wrapper" onclick="openAvatarModal()" title="Clique para trocar sua foto ou escolher dos arquivos">
+                  <img id="profileAvatarImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Avatar do Usuário">
+                  <button type="button" class="btn-change-avatar" onclick="event.stopPropagation(); openAvatarModal();" aria-label="Trocar Foto">
+                    <i class="fa-solid fa-camera"></i>
+                  </button>
+                </div>
+                <button type="button" class="btn-quick-upload-avatar" onclick="triggerFileInput()" style="background: rgba(229, 9, 20, 0.15); color: #fff; border: 1px dashed rgba(229, 9, 20, 0.45); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.background='#e50914'" onmouseout="this.style.background='rgba(229, 9, 20, 0.15)'">
+                  <i class="fa-solid fa-folder-open text-highlight"></i> Pegar dos Arquivos
+                </button>
+              </div>
+
+              <div class="profile-user-info">
+                <h1 id="profileUserName">MARJORIE FERNANDES PEDROSO TALBERG</h1>
+                <div class="profile-email-phone">
+                  <span><i class="fa-regular fa-envelope"></i> <span id="profileUserEmail">marjorietalberg1@gmail.com</span></span>
+                  <span><i class="fa-solid fa-phone"></i> <span id="profileUserPhone">+5514999048475</span></span>
+                </div>
+                <div class="profile-badges-row">
+                  <span class="badge-ifood-club" id="profileLevelBadge">
+                    <i class="fa-solid fa-crown"></i> Nível Ouro • Clube Sushi
+                  </span>
+                  <span class="badge-member-since">Membro desde 2024</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botões de Ação do Perfil -->
+            <div class="profile-header-actions">
+              <button type="button" class="btn-profile-edit" onclick="openEditProfileModal()">
+                <i class="fa-solid fa-user-pen"></i> Editar Perfil
+              </button>
+              <button type="button" class="btn-profile-logout" onclick="handleLogout()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Estatísticas Rápidas do Usuário -->
+          <div class="profile-stats-grid">
+            <div class="profile-stat-item">
+              <div class="stat-icon-wrap stat-icon-points">
+                <i class="fa-solid fa-coins"></i>
+              </div>
+              <div class="stat-info-text">
+                <span class="stat-info-label">Pontos Sushi Club</span>
+                <strong class="stat-info-val" id="statPointsVal">1.850 Pts</strong>
+              </div>
+            </div>
+
+            <div class="profile-stat-item">
+              <div class="stat-icon-wrap stat-icon-wallet">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <div class="stat-info-text">
+                <span class="stat-info-label">Saldo na Carteira</span>
+                <strong class="stat-info-val" id="statWalletVal">R$ 15,50</strong>
+              </div>
+            </div>
+
+            <div class="profile-stat-item">
+              <div class="stat-icon-wrap stat-icon-orders">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+              <div class="stat-info-text">
+                <span class="stat-info-label">Pedidos Concluídos</span>
+                <strong class="stat-info-val" id="statOrdersVal">2 Pedidos</strong>
+              </div>
+            </div>
+
+            <div class="profile-stat-item">
+              <div class="stat-icon-wrap stat-icon-coupons">
+                <i class="fa-solid fa-ticket"></i>
+              </div>
+              <div class="stat-info-text">
+                <span class="stat-info-label">Cupons Ativos</span>
+                <strong class="stat-info-val" id="statCouponsVal">1 Disponível</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Abas de Navegação das Seções do Perfil -->
+        <div class="profile-nav-tabs">
+          <button type="button" class="profile-tab-button active" onclick="switchProfileTab('club', this)">
+            <i class="fa-solid fa-gift"></i> Clube de Benefícios & Pontos
+          </button>
+          <button type="button" class="profile-tab-button" onclick="switchProfileTab('orders', this)">
+            <i class="fa-solid fa-clock-rotate-left"></i> Meus Pedidos (com Fotos)
+          </button>
+          <button type="button" class="profile-tab-button" onclick="switchProfileTab('addresses', this)">
+            <i class="fa-solid fa-location-dot"></i> Meus Endereços
+          </button>
+          <button type="button" class="profile-tab-button" onclick="switchProfileTab('wallet', this)">
+            <i class="fa-solid fa-credit-card"></i> Carteira & Pagamentos
+          </button>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- ABA 1: CLUBE DE BENEFÍCIOS & PONTOS IFOOD                     -->
+        <!-- ============================================================== -->
+        <div class="profile-tab-pane active" id="tabPane-club">
+          
+          <!-- Banner Hero do Clube -->
+          <div class="club-hero-card">
+            <div class="club-hero-top">
+              <div class="club-title-group">
+                <h2>
+                  <i class="fa-solid fa-award text-highlight"></i>
+                  Clube de Fidelidade Sushi House
+                </h2>
+                <p>Acumule pontos em todos os seus pedidos e resgate cupons de desconto reais, frete grátis e pratos cortesia!</p>
+              </div>
+              
+              <div class="club-points-counter">
+                <span>Seu Saldo Atual</span>
+                <strong id="clubPointsCounterVal">1.850</strong>
+              </div>
+            </div>
+
+            <!-- Progresso de Categoria / Nível VIP -->
+            <div class="club-level-box">
+              <div class="club-level-header">
+                <span class="club-level-name">
+                  <i class="fa-solid fa-crown"></i> Categoria: <strong>Nível Ouro</strong>
+                </span>
+                <span style="color: #aaa;">Meta: 3.000 pts (Diamante)</span>
+              </div>
+              <div class="club-progress-track">
+                <div class="club-progress-fill" id="clubProgressFill" style="width: 61%;"></div>
+              </div>
+              <div class="club-level-footer">
+                <span id="clubLevelTargetMsg">Faltam 1.150 pontos para você desbloquear o Nível Diamante!</span>
+                <span style="color: #ffb703; font-weight: 700;">+20% de bônus em compras</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Catálogo de Cupons para Resgate por Pontos -->
+          <div class="section-subtitle-wrap">
+            <h3><i class="fa-solid fa-tags text-highlight"></i> Resgatar Cupons com Pontos (Estilo iFood)</h3>
+            <span style="font-size: 0.82rem; color: #888;">Clique em "Resgatar" para usar seus pontos</span>
+          </div>
+
+          <div class="coupons-catalog-grid" id="couponsCatalogGrid">
+            <!-- Renderizado via perfil.js -->
+          </div>
+
+          <!-- Meus Cupons Ativos -->
+          <div class="section-subtitle-wrap">
+            <h3><i class="fa-solid fa-ticket-simple text-highlight"></i> Meus Cupons Prontos para Uso</h3>
+            <span style="font-size: 0.82rem; color: #22c55e; font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Válidos para o carrinho</span>
+          </div>
+
+          <div class="active-coupons-grid" id="activeCouponsGrid">
+            <!-- Renderizado via perfil.js -->
+          </div>
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- ABA 2: HISTÓRICO DE PEDIDOS COM FOTOS REAIS (ESTILO IFOOD)    -->
+        <!-- ============================================================== -->
+        <div class="profile-tab-pane" id="tabPane-orders">
+          <div class="section-subtitle-wrap">
+            <h3><i class="fa-solid fa-bag-shopping text-highlight"></i> Histórico de Pedidos com Imagens dos Pratos</h3>
+            <span style="font-size: 0.82rem; color: #888;">Clique em "Pedir Novamente" para recarregar a sacola</span>
+          </div>
+
+          <div class="orders-history-container" id="ordersHistoryContainer">
+            <!-- Renderizado via perfil.js -->
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- ABA 3: MEUS ENDEREÇOS SALVOS                                  -->
+        <!-- ============================================================== -->
+        <div class="profile-tab-pane" id="tabPane-addresses">
+          <div class="section-subtitle-wrap">
+            <h3><i class="fa-solid fa-map-location-dot text-highlight"></i> Endereços de Entrega Salvos</h3>
+            <button type="button" class="btn-profile-edit" onclick="openNewAddressModal()" style="border-color: #e50914; color: #fff;">
+              <i class="fa-solid fa-plus"></i> Novo Endereço
+            </button>
+          </div>
+
+          <div class="addresses-grid" id="addressesGrid">
+            <!-- Renderizado via perfil.js -->
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- ABA 4: CARTEIRA & PAGAMENTOS (SUSHIPAY)                       -->
+        <!-- ============================================================== -->
+        <div class="profile-tab-pane" id="tabPane-wallet">
+          <div class="section-subtitle-wrap">
+            <h3><i class="fa-solid fa-wallet text-highlight"></i> Carteira Digital & Meios de Pagamento</h3>
+            <span style="font-size: 0.82rem; color: #888;">Cashback acumulado e cartões salvos</span>
+          </div>
+
+          <div class="wallet-cards-grid">
+            <div class="wallet-balance-box">
+              <span>Saldo SushiPay Disponível</span>
+              <strong id="walletBalanceValue">R$ 15,50</strong>
+              <p style="font-size: 0.82rem; margin: 0; opacity: 0.9;">Utilize seu saldo de cashback para abater no valor final dos seus próximos pedidos de sushi.</p>
+            </div>
+
+            <div class="virtual-card-box">
+              <div class="virtual-card-chip">
+                <i class="fa-solid fa-sim-card"></i>
+                <i class="fa-brands fa-cc-mastercard" style="font-size: 2rem; color: #eb001b;"></i>
+              </div>
+              <div class="virtual-card-num">•••• •••• •••• 4028</div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #aaa;">
+                <span>TITULAR: MARJORIE TALBERG</span>
+                <span>EXP: 08/29</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ============================================================== -->
+      <!-- FOOTER PADRÃO                                                 -->
+      <!-- ============================================================== -->
+      <footer class="main-footer">
+        <div class="container footer-content-row">
+          <div class="footer-brand-wrap">
+            <img src="logosushi.png" alt="Sushi House" class="footer-logo-img">
+            <div class="footer-brand-text">
+              <span class="brand-name">Sushi House</span>
+              <span class="brand-slogan">SABOR DO ORIENTE</span>
+            </div>
+          </div>
+
+          <nav class="footer-nav-menu">
+            <a href="index.html#home">Home</a>
+            <a href="cardapio.html">Cardápio</a>
+            <a href="cardapio.html#promocoes-combos">Promoções</a>
+            <a href="perfil.html">Meu Perfil</a>
+          </nav>
+
+          <div class="footer-social-icons">
+            <a href="https://wa.me/551434060000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://instagram.com/sushihouse.garca" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </footer>
+
+      <!-- BARRA DE NAVEGAÇÃO INFERIOR FIXA (ESTILO APP MOBILE) -->
+      <nav class="mobile-bottom-tabs" id="mobileBottomTabs">
+        <a href="index.html#home" class="tab-item">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+        <a href="cardapio.html" class="tab-item">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Cardápio</span>
+        </a>
+        <button type="button" class="tab-item" onclick="openCart()">
+          <div class="tab-badge-wrap">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="tab-badge" id="bottomCartBadge">0</span>
+          </div>
+          <span>Sacola</span>
+        </button>
+        <a href="sobre.html" class="tab-item">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Sobre</span>
+        </a>
+        <a href="perfil.html" class="tab-item active">
+          <i class="fa-solid fa-user"></i>
+          <span>Perfil</span>
+        </a>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: SELETOR DE FOTO / AVATAR DO PERFIL                      -->
+  <!-- ============================================================== -->
+  <div class="app-modal" id="modalAvatarPicker">
+    <div class="modal-backdrop" onclick="closeAvatarModal()"></div>
+    <div class="modal-dialog" style="max-width: 560px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="fa-solid fa-camera text-highlight"></i>
+          <h3>Trocar Imagem de Perfil</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeAvatarModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Opção 1: Upload Direto dos Arquivos do Usuário -->
+        <div class="avatar-upload-box" onclick="triggerFileInput()" title="Clique para procurar uma foto no seu computador">
+          <input type="file" id="avatarFileInput" accept="image/*" style="display: none;" onchange="handleAvatarFileUpload(this)">
+          <div class="upload-icon-circle">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+          <div class="upload-text-group">
+            <h4>Carregar Foto dos seus Arquivos</h4>
+            <p>Clique aqui para navegar nos arquivos do seu computador ou celular (PNG, JPG, WEBP)</p>
+          </div>
+          <button type="button" class="btn-browse-files">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Procurar nos Arquivos
+          </button>
+        </div>
+
+        <div class="modal-section-divider">
+          <span>OU ESCOLHA UM DOS AVATARES EXCLUSIVOS</span>
+        </div>
+
+        <!-- Opção 2: Grade de Avatares Temáticos Pré-definidos -->
+        <p style="color: #aaa; font-size: 0.82rem; margin-bottom: 8px;">Clique em qualquer avatar para aplicar imediatamente:</p>
+        <div class="avatar-presets-grid" id="avatarPresetsGrid">
+          <!-- Preenchido via perfil.js -->
+        </div>
+
+        <!-- Opção 3: Link URL de Imagem da Web -->
+        <div style="margin-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1rem;">
+          <label style="font-size: 0.8rem; color: #bbb; display: block; margin-bottom: 6px;">Ou cole o link URL de uma imagem da internet:</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="url" id="customAvatarUrlInput" placeholder="https://exemplo.com/minha-foto.jpg" style="flex: 1; background: #181818; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff; font-size: 0.85rem;">
+            <button type="button" class="btn-calc-cep" onclick="applyCustomAvatarUrl()">Aplicar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: EDITAR DADOS DO PERFIL                                  -->
+  <!-- ============================================================== -->
+  <div class="app-modal" id="modalEditProfile">
+    <div class="modal-backdrop" onclick="closeEditProfileModal()"></div>
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="fa-solid fa-user-pen text-highlight"></i>
+          <h3>Editar Perfil</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeEditProfileModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="saveEditProfileSubmit(event)">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label style="font-size: 0.8rem; color: #aaa;">Nome Completo</label>
+            <input type="text" id="editProfileName" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 14px; color: #fff;">
+          </div>
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label style="font-size: 0.8rem; color: #aaa;">WhatsApp / Telefone</label>
+            <input type="text" id="editProfilePhone" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 14px; color: #fff;">
+          </div>
+          <button type="submit" class="btn-submit-order" style="justify-content: center;">
+            <span>Salvar Alterações</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: ADICIONAR NOVO ENDEREÇO COM BUSCA DE CEP               -->
+  <!-- ============================================================== -->
+  <div class="app-modal" id="modalNewAddress">
+    <div class="modal-backdrop" onclick="closeNewAddressModal()"></div>
+    <div class="modal-dialog" style="max-width: 500px;">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="fa-solid fa-location-dot text-highlight"></i>
+          <h3>Cadastrar Novo Endereço</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeNewAddressModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="saveNewAddressSubmit(event)">
+          <div class="form-group" style="margin-bottom: 10px;">
+            <label style="font-size: 0.8rem; color: #aaa;">Tipo do Local</label>
+            <select id="newAddrType" style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+              <option value="Casa">Casa</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 10px;">
+            <label style="font-size: 0.8rem; color: #aaa;">CEP (busca automática)</label>
+            <input type="text" id="newAddrCep" placeholder="17400-000" maxlength="9" oninput="handleAddressCepLookup(this)" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+          </div>
+          <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <div style="flex: 2;">
+              <label style="font-size: 0.8rem; color: #aaa;">Rua / Logradouro</label>
+              <input type="text" id="newAddrStreet" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+            </div>
+            <div style="flex: 1;">
+              <label style="font-size: 0.8rem; color: #aaa;">Número</label>
+              <input type="text" id="newAddrNumber" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+            </div>
+          </div>
+          <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <div style="flex: 1;">
+              <label style="font-size: 0.8rem; color: #aaa;">Bairro</label>
+              <input type="text" id="newAddrDistrict" required style="width: 100%; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+            </div>
+            <div style="flex: 1;">
+              <label style="font-size: 0.8rem; color: #aaa;">Cidade / UF</label>
+              <div style="display: flex; gap: 4px;">
+                <input type="text" id="newAddrCity" required style="flex: 2; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+                <input type="text" id="newAddrState" required style="flex: 1; background: #1c1c1c; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 9px 12px; color: #fff;">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit-order" style="justify-content: center;">
+            <span>Salvar Endereço</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================================== -->
+  <!-- MODAL / TELA: AUTENTICAÇÃO (LOGIN & CADASTRO) COM BACKEND             -->
+  <!-- ==================================================================== -->
+  <div class="app-modal" id="modalAuth">
+    <div class="modal-backdrop" onclick="closeAuthModal()"></div>
+    <div class="modal-dialog modal-auth-dialog">
+      <button type="button" class="modal-close-btn auth-close" onclick="closeAuthModal()">&times;</button>
+
+      <div class="auth-layout">
+        <div class="auth-visual-col">
+          <img src="capalogin.png" alt="Login Sushi House" class="auth-banner-img" onerror="this.src='bannercapainicial.png'">
+          <div class="auth-visual-overlay">
+            <h3>Bem-vindo à Experiência Oriental</h3>
+            <p>Faça parte do Sushi Club para acumular pontos e receber promoções exclusivas.</p>
+          </div>
+        </div>
+
+        <div class="auth-form-col">
+          <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Entrar</button>
+            <button type="button" class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">Criar Conta</button>
+          </div>
+
+          <form id="formLogin" class="auth-form active" onsubmit="handleLoginSubmit(event)">
+            <h4 class="form-title">Acesse sua conta</h4>
+            <div class="form-group">
+              <label>E-mail cadastrado</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Senha</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="••••••••" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btnLoginSubmit">
+              <span>Entrar no Sushi House</span>
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            </button>
+
+            <!-- Acesso Direto de Administrador com Senha Padrão -->
+            <div class="modal-admin-access-wrap">
+              <button type="button" class="btn-modal-admin-trigger" onclick="toggleAdminPinModal()">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-shield-halved" style="color: #ffb703; font-size: 1rem;"></i>
+                  <span>Acessar como Administrador</span>
+                </div>
+                <span style="background: rgba(255, 183, 3, 0.2); color: #ffb703; border: 1px solid #ffb703; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 50px;">
+                  <i class="fa-solid fa-crown"></i> ADMIN
+                </span>
+              </button>
+
+              <div id="modalAdminPinBox" class="modal-admin-pin-box" style="display: none;">
+                <p style="margin: 0 0 6px 0; font-size: 0.78rem; color: #ccc;">
+                  <i class="fa-solid fa-key" style="color: #ffb703;"></i> Senha padrão do administrador (<strong>123456</strong>):
+                </p>
+                <div class="modal-admin-pin-row">
+                  <div class="input-with-icon" style="flex: 1;">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="modalAdminPinInput" placeholder="Senha: 123456" value="123456" style="padding: 8px 12px 8px 36px; font-size: 0.82rem;" onkeydown="if(event.key==='Enter'){event.preventDefault();entrarComoAdminModal();}">
+                  </div>
+                  <button type="button" class="btn-modal-admin-pin-submit" id="btnModalAdminPinSubmit" onclick="entrarComoAdminModal()">
+                    <span>Entrar Admin</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <form id="formRegister" class="auth-form" onsubmit="handleRegisterSubmit(event)">
+            <h4 class="form-title">Crie sua nova conta</h4>
+            <div class="form-group">
+              <label>Nome Completo</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="regName" placeholder="Seu nome completo" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="regEmail" placeholder="seu@email.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Telefone / WhatsApp</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-phone"></i>
+                <input type="text" id="regPhone" placeholder="(14) 99876-5432">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Senha (mínimo 6 caracteres)</label>
+              <div class="input-with-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPassword" placeholder="Crie uma senha forte" minlength="6" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btnRegisterSubmit">
+              <span>Finalizar Cadastro</span>
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MODAL: SACOLA / CARRINHO DE PEDIDOS                            -->
+  <!-- ============================================================== -->
+  <div class="app-modal" id="modalCart">
+    <div class="modal-backdrop" onclick="closeCart()"></div>
+    <div class="modal-dialog modal-cart-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="fa-solid fa-bag-shopping text-highlight"></i>
+          <h3>Sua Sacola de Pedidos</h3>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeCart()">&times;</button>
+      </div>
+
+      <div class="modal-body cart-modal-body">
+
+        <!-- Header do Restaurante no Carrinho (Estilo iFood) -->
+        <div class="cart-restaurant-banner">
+          <img src="logosushi.png" alt="Sushi House" class="cart-rest-logo-img">
+          <div class="cart-rest-info">
+            <h4 class="cart-rest-title">Sushi House - Sabor do Oriente</h4>
+            <span class="cart-rest-meta"><i class="fa-regular fa-clock text-highlight"></i> 30-45 min • <i class="fa-solid fa-star" style="color: #ffb703;"></i> 4.9 • Garça e Região</span>
+          </div>
+        </div>
+
+        <!-- Barra de Frete Grátis Estilo iFood -->
+        <div class="cart-free-shipping-card" id="freeShippingCard">
+          <div class="free-shipping-header">
+            <span><i class="fa-solid fa-motorcycle" style="color: #e50914;"></i> Entrega Sushi House</span>
+            <span id="freeShippingTarget">Frete Grátis acima de R$ 100,00</span>
+          </div>
+          <div class="free-shipping-bar-track">
+            <div class="free-shipping-bar-fill" id="freeShippingBarFill" style="width: 0%;"></div>
+          </div>
+          <p class="free-shipping-status-msg" id="freeShippingStatusMsg">Adicione itens para calcular o frete grátis</p>
+        </div>
+
+        <!-- Lista de Itens no Carrinho (Estilo iFood com fotos e controle +/-) -->
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <!-- Botão Adicionar Mais Itens Estilo iFood -->
+        <div class="cart-add-more-row" id="cartAddMoreRow">
+          <a href="cardapio.html" class="btn-add-more-food" onclick="closeCart()">
+            <i class="fa-solid fa-plus-circle"></i> Adicionar mais itens ao pedido
+          </a>
+        </div>
+
+        <!-- Talheres e Hashi Descartáveis (Estilo iFood) -->
+        <div class="cart-utensils-card" id="cartUtensilsCard">
+          <div class="utensils-text">
+            <i class="fa-solid fa-utensils text-highlight"></i>
+            <div>
+              <strong>Precisa de hashi e shoyu descartáveis?</strong>
+              <small>Economize recursos: marque apenas se for utilizar.</small>
+            </div>
+          </div>
+          <label class="cart-toggle-switch">
+            <input type="checkbox" id="cartNeedUtensils" checked>
+            <span class="cart-toggle-slider"></span>
+          </label>
+        </div>
+
+        <!-- Cupom de Desconto Estilo iFood -->
+        <div class="cart-coupon-section" id="cartCouponSection">
+          <div class="coupon-input-group">
+            <i class="fa-solid fa-ticket text-highlight"></i>
+            <input type="text" id="cartCouponInput" placeholder="Possui cupom? (Ex: SUSHI10, PRIMEIRACOMPRA)">
+            <button type="button" class="btn-apply-coupon" onclick="applyCartCoupon()">Aplicar</button>
+          </div>
+          <div id="appliedCouponFeedback" class="applied-coupon-feedback" style="display: none;"></div>
+        </div>
+
+        <!-- Simulador de CEP e Prazo de Entrega Estilo iFood -->
+        <div class="cart-cep-section">
+          <div class="cart-cep-section-title">
+            <span><i class="fa-solid fa-location-dot" style="color: #e50914;"></i> Simulação de Frete & Entrega (iFood)</span>
+            <span style="font-size: 0.75rem; color: #888; font-weight: normal;">Garça e Região</span>
+          </div>
+          
+          <div class="cep-input-row">
+            <div class="cep-input-wrap">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="cartCepInput" placeholder="Digite seu CEP (ex: 17400-000)" maxlength="9" oninput="handleCepInput(this)" onkeydown="if(event.key==='Enter'){event.preventDefault();consultarCepCart();}">
+            </div>
+            <button type="button" class="btn-calc-cep" onclick="consultarCepCart()">
+              <span>Calcular</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn-use-quick-cep" onclick="preencherCepRapido('17400-000')">
+              <i class="fa-solid fa-bolt"></i> Usar CEP Centro de Garça (17400-000)
+            </button>
+            <button type="button" class="btn-use-quick-cep" onclick="preencherCepRapido('17500-000')">
+              <i class="fa-solid fa-location-arrow"></i> Marília (17500-000)
+            </button>
+          </div>
+
+          <!-- Card de Resultado da Simulação -->
+          <div class="cep-result-card" id="cartCepResultCard">
+            <div class="cep-address-text">
+              <i class="fa-solid fa-circle-check" style="color: #22c55e;"></i>
+              <span id="cepDetectedAddress">Garça - SP (Região Central)</span>
+            </div>
+            <div class="cep-delivery-meta">
+              <span id="cepDetectedEta"><i class="fa-regular fa-clock"></i> Chega em 30 a 45 min</span>
+              <span class="cep-fee-tag" id="cepDetectedFee">R$ 7,00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção de Checkout / Dados de Entrega -->
+        <div class="checkout-form-section" id="checkoutSection">
+          <h4 class="checkout-subheading"><i class="fa-solid fa-user-check"></i> Dados de Entrega</h4>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label>Seu Nome Completo *</label>
+              <input type="text" id="orderClientName" placeholder="Ex: João da Silva" required>
+            </div>
+            <div class="form-group col-6">
+              <label>WhatsApp / Telefone *</label>
+              <input type="text" id="orderClientPhone" placeholder="(14) 99999-9999" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Endereço Completo (Rua, Número, Bairro, Complemento) *</label>
+            <input type="text" id="orderClientAddress" placeholder="Rua das Flores, 123 - Centro, Garça" required>
+          </div>
+          <div class="form-group">
+            <label>Observações do Pedido (Opcional)</label>
+            <input type="text" id="orderNotes" placeholder="Sem gengibre, shoyu extra, troco para R$ 50...">
+          </div>
+
+          <h4 class="checkout-subheading"><i class="fa-solid fa-wallet"></i> Forma de Pagamento</h4>
+          <div class="payment-methods-grid">
+            <label class="payment-card active">
+              <input type="radio" name="paymentMethod" value="PIX" checked onchange="updatePaymentMethodSelection()">
+              <i class="fa-brands fa-pix" style="color: #32bcad; font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">PIX Instantâneo</strong>
+              <small style="color: #22c55e; font-weight: 700;">5% OFF</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Cartão de Crédito" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-credit-card" style="font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">Cartão Online</strong>
+              <small style="color: #888;">Até 3x s/ juros</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Cartão na Entrega" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-receipt" style="font-size: 1.2rem;"></i>
+              <strong style="color: #fff;">Na Entrega</strong>
+              <small style="color: #888;">Maquininha</small>
+            </label>
+            <label class="payment-card">
+              <input type="radio" name="paymentMethod" value="Dinheiro" onchange="updatePaymentMethodSelection()">
+              <i class="fa-solid fa-money-bill-wave" style="font-size: 1.2rem; color: #22c55e;"></i>
+              <strong style="color: #fff;">Dinheiro</strong>
+              <small style="color: #888;">Levar troco</small>
+            </label>
+          </div>
+        </div>
+
+        <!-- Resumo Financeiro -->
+        <div class="cart-summary-box">
+          <div class="summary-line">
+            <span>Subtotal dos Itens:</span>
+            <span id="cartSubtotal">R$ 0,00</span>
+          </div>
+          <div class="summary-line">
+            <span>Taxa de Entrega (iFood):</span>
+            <span id="cartDelivery">R$ 7,00</span>
+          </div>
+          <div class="summary-line" id="couponDiscountLine" style="display: none; color: #22c55e;">
+            <span>Desconto Cupom:</span>
+            <span id="cartCouponDiscount">- R$ 0,00</span>
+          </div>
+          <div class="summary-line" id="pixDiscountLine" style="display: none; color: #22c55e;">
+            <span>Desconto PIX (5%):</span>
+            <span id="cartPixDiscount">- R$ 0,00</span>
+          </div>
+          <div class="summary-line total-line">
+            <strong>Total Geral:</strong>
+            <strong id="cartTotal" class="text-highlight">R$ 0,00</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer" style="display: flex; gap: 12px; align-items: center; justify-content: space-between;">
+        <button type="button" class="btn-clear-cart" onclick="clearCart()">
+          <i class="fa-regular fa-trash-can"></i> Limpar
+        </button>
+        <button type="button" class="btn-submit-order" id="btnSubmitOrder" onclick="submitOrderToBackend()">
+          <span>Confirmar e Fazer Pedido</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="perfil.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "sushi-house-app",
+  "version": "1.0.0",
+  "description": "Atividade Final - IHC e Técnicas Avançadas de Programação Web e Mobile - Sushi House",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "ihc",
+    "mobile",
+    "web",
+    "restaurante",
+    "sushi",
+    "mockup"
+  ],
+  "author": "Equipe Sushi House",
+  "license": "ISC"
+}

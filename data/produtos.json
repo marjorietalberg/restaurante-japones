@@ -1,0 +1,478 @@
+[
+  {
+    "id": 1,
+    "nome": "Salmão Especial",
+    "categoria": "sushis",
+    "preco": 52.99,
+    "precoAntigo": 62.99,
+    "promocao": true,
+    "destaqueTag": "ESPECIAL DA CASA",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 120,
+    "descricao": "Autêntica porção de sushis finos preparados com ingredientes selecionados para proporcionar uma experiência gastronômica memorável.",
+    "ingredientes": [
+      "Salmão fresco selecionado",
+      "Arroz japonês especial (Shari)",
+      "Cream cheese cremoso",
+      "Cebolinha picada fresca",
+      "Gergelim tostado duplo"
+    ],
+    "porcao": "8 unidades",
+    "peso": "250 g",
+    "detalhes": "Preparado com salmão fresco e ingredientes selecionados.",
+    "imagem": "cardapio-salmao-especial.jpg",
+    "galeria": [
+      "cardapio-salmao-especial.jpg",
+      "prato-essencia.jpg",
+      "galeria-3.jpg",
+      "galeria-1.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Temaki Frito",
+    "categoria": "temakis",
+    "preco": 45.99,
+    "precoAntigo": 55.99,
+    "promocao": true,
+    "destaqueTag": "MAIS PEDIDO",
+    "avaliacao": 4.8,
+    "avaliacoesQtd": 94,
+    "descricao": "Temaki empanado na farinha panko crocante, recheado com salmão grelhado suculento e cream cheese.",
+    "ingredientes": [
+      "Alga nori crocante",
+      "Salmão grelhado desfiado",
+      "Farinha panko japonesa",
+      "Cream cheese especial",
+      "Molho tarê artesanal da casa"
+    ],
+    "porcao": "1 unidade grande (cone)",
+    "peso": "220 g",
+    "detalhes": "Frito na hora para máxima crocância e sabor.",
+    "imagem": "cardapio-temaki-frito.jpg",
+    "galeria": [
+      "cardapio-temaki-frito.jpg",
+      "cardapio-temaki-salmao.jpg",
+      "galeria-3.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Temaki de Salmão",
+    "categoria": "temakis",
+    "preco": 39.99,
+    "precoAntigo": 47.99,
+    "promocao": true,
+    "destaqueTag": "CLÁSSICO",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 160,
+    "descricao": "Cone tradicional de alga nori crocante recheado com cubos generosos de salmão fresco do dia, arroz temperado e cebolinha.",
+    "ingredientes": [
+      "Salmão fresco em cubos",
+      "Alga nori importada",
+      "Arroz temperado no ponto",
+      "Cebolinha fresca",
+      "Acompanha shoyu e wasabi"
+    ],
+    "porcao": "1 unidade tradicional",
+    "peso": "200 g",
+    "detalhes": "Enrolado imediatamente antes do envio para manter a alga sequinha.",
+    "imagem": "cardapio-temaki-salmao.jpg",
+    "galeria": [
+      "cardapio-temaki-salmao.jpg",
+      "cardapio-temaki-atum.jpg",
+      "cardapio-salmao-especial.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "Temaki Atum",
+    "categoria": "temakis",
+    "preco": 33.95,
+    "precoAntigo": 41,
+    "promocao": true,
+    "destaqueTag": "DESTAQUE",
+    "avaliacao": 4.7,
+    "avaliacoesQtd": 68,
+    "descricao": "Atum fresco selecionado em cubos com gergelim torrado e toque especial de azeite trufado.",
+    "ingredientes": [
+      "Atum nobre fresco",
+      "Alga nori crocante",
+      "Gergelim torrado",
+      "Azeite trufado leve",
+      "Cebolinha e arroz japonês"
+    ],
+    "porcao": "1 unidade tradicional",
+    "peso": "190 g",
+    "detalhes": "Corte preciso que valoriza o frescor do atum vermelho.",
+    "imagem": "cardapio-temaki-atum.jpg",
+    "galeria": [
+      "cardapio-temaki-atum.jpg",
+      "cardapio-sushi-atum.jpg",
+      "cardapio-temaki-salmao.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "Yakisoba Carne",
+    "categoria": "entradas",
+    "preco": 39.95,
+    "promocao": false,
+    "destaqueTag": "PRATO QUENTE",
+    "avaliacao": 4.8,
+    "avaliacoesQtd": 85,
+    "descricao": "Macarrão oriental frito no wok com tiras macias de carne bovina, legumes frescos e molho oriental autêntico.",
+    "ingredientes": [
+      "Macarrão artesanal para yakisoba",
+      "Tiras de carne bovina selecionada",
+      "Brócolis, couve-flor e cenoura",
+      "Acelga e cebola roxa",
+      "Molho especial à base de shoyu"
+    ],
+    "porcao": "1 porção individual generosa",
+    "peso": "450 g",
+    "detalhes": "Preparado no fogo alto mantendo os legumes crocantes.",
+    "imagem": "cardapio-yakisoba.jpg",
+    "galeria": [
+      "cardapio-yakisoba.jpg",
+      "cardapio-shimeji.jpg",
+      "cardapio-harumaki.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "Harumaki",
+    "categoria": "entradas",
+    "preco": 40,
+    "promocao": false,
+    "destaqueTag": "APERITIVO",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 72,
+    "descricao": "Rolinhos primavera super crocantes recheados com legumes selecionados ou carne temperada com molho agridoce.",
+    "ingredientes": [
+      "Massa fina crocante",
+      "Recheio de carne e legumes temperados",
+      "Molho agridoce tradicional",
+      "Óleo vegetal puro para fritura leve"
+    ],
+    "porcao": "4 unidades grandes",
+    "peso": "240 g",
+    "detalhes": "Crocância inigualável servida bem quentinha.",
+    "imagem": "cardapio-harumaki.jpg",
+    "galeria": [
+      "cardapio-harumaki.jpg",
+      "cardapio-shimeji.jpg",
+      "cardapio-yakisoba.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "Shimeji",
+    "categoria": "entradas",
+    "preco": 32,
+    "promocao": false,
+    "destaqueTag": "PREFERIDO",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 140,
+    "descricao": "Cogumelos shimeji salteados na manteiga especial com shoyu nobre e finalizados com cebolinha fresca picada.",
+    "ingredientes": [
+      "Cogumelos shimeji frescos",
+      "Manteiga de primeira qualidade",
+      "Molho shoyu nobre",
+      "Saquê culinário para deglacear",
+      "Cebolinha fresca"
+    ],
+    "porcao": "Porção para compartilhar (2 pessoas)",
+    "peso": "280 g",
+    "detalhes": "Salteado artesanalmente no momento do pedido.",
+    "imagem": "cardapio-shimeji.jpg",
+    "galeria": [
+      "cardapio-shimeji.jpg",
+      "cardapio-yakisoba.jpg",
+      "cardapio-harumaki.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "Sushi Atum",
+    "categoria": "sushis",
+    "preco": 32.9,
+    "precoAntigo": 42.9,
+    "promocao": true,
+    "destaqueTag": "PROMOÇÃO",
+    "avaliacao": 4.8,
+    "avaliacoesQtd": 53,
+    "descricao": "Niguiris tradicionais com lâminas de atum fresco sobre arroz shari temperado com maestria.",
+    "ingredientes": [
+      "Atum fresco fatiado",
+      "Arroz shari tradicional temperado",
+      "Toque leve de wasabi natural",
+      "Acompanha molho shoyu"
+    ],
+    "porcao": "6 unidades de niguiri",
+    "peso": "180 g",
+    "detalhes": "Peixe nobre com corte tradicional japonês.",
+    "imagem": "cardapio-sushi-atum.jpg",
+    "galeria": [
+      "cardapio-sushi-atum.jpg",
+      "cardapio-filadelfia.jpg",
+      "cardapio-salmao-especial.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "nome": "Filadélfia",
+    "categoria": "sushis",
+    "preco": 33.99,
+    "promocao": false,
+    "destaqueTag": "TRADICIONAL",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 190,
+    "descricao": "Uramaki clássico com salmão fresco em cubos, cream cheese cremoso e envolto em gergelim tostado crocante.",
+    "ingredientes": [
+      "Salmão fresco selecionado",
+      "Cream cheese cremoso",
+      "Arroz por fora com alga nori",
+      "Gergelim tostado misto",
+      "Cebolinha fresca"
+    ],
+    "porcao": "8 unidades",
+    "peso": "220 g",
+    "detalhes": "O rolinho mais amado da culinária nipo-brasileira.",
+    "imagem": "cardapio-filadelfia.jpg",
+    "galeria": [
+      "cardapio-filadelfia.jpg",
+      "cardapio-salmao-especial.jpg",
+      "galeria-3.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "nome": "Mochi Morango",
+    "categoria": "sobremesas",
+    "preco": 22.9,
+    "promocao": false,
+    "destaqueTag": "SOBREMESA JAPONESA",
+    "avaliacao": 5,
+    "avaliacoesQtd": 77,
+    "descricao": "Doce tradicional japonês feito com massa elástica de arroz mochigome e recheado com morango fresco e pasta doce.",
+    "ingredientes": [
+      "Farinha de arroz glutinoso (Mochigome)",
+      "Morango fresco in natura",
+      "Pasta doce especial",
+      "Amido para polvilhar"
+    ],
+    "porcao": "2 unidades artesanais",
+    "peso": "120 g",
+    "detalhes": "Textura aveludada e macia, sabor único e equilibrado.",
+    "imagem": "cardapio-mochi.jpg",
+    "galeria": [
+      "cardapio-mochi.jpg",
+      "cardapio-tempura-sorvete.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "nome": "Tempurá de Sorvete",
+    "categoria": "sobremesas",
+    "preco": 25,
+    "promocao": false,
+    "destaqueTag": "EXCLUSIVO",
+    "avaliacao": 4.8,
+    "avaliacoesQtd": 45,
+    "descricao": "Bola de sorvete cremoso envolvida em massa crocante quente e frita rapidamente, servida com calda quente de chocolate.",
+    "ingredientes": [
+      "Sorvete de creme artesanal",
+      "Pão de ló leve e macio",
+      "Massa de tempurá crocante",
+      "Calda de chocolate e castanhas"
+    ],
+    "porcao": "1 porção individual",
+    "peso": "200 g",
+    "detalhes": "Contraste surpreendente entre o quente da casca e o gelado do sorvete.",
+    "imagem": "cardapio-tempura-sorvete.jpg",
+    "galeria": [
+      "cardapio-tempura-sorvete.jpg",
+      "cardapio-mochi.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "nome": "Combo 1 — Clássico",
+    "categoria": "combinados",
+    "comboTag": "COMBO 1",
+    "preco": 52.99,
+    "precoAntigo": 65,
+    "promocao": true,
+    "destaqueTag": "COMBO INDIVIDUAL",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 110,
+    "descricao": "Ideal para 1 pessoa: seleção perfeita com 4 sashimis salmão fresco, 4 uramakis filadélfia, 4 hossomakis e 4 hot rolls crocantes.",
+    "ingredientes": [
+      "4 Sashimis de Salmão",
+      "4 Uramakis Filadélfia",
+      "4 Hossomakis de Salmão",
+      "4 Hot Rolls crocantes com tarê"
+    ],
+    "porcao": "16 peças",
+    "peso": "380 g",
+    "detalhes": "Equilíbrio entre sushis frios e quentes.",
+    "imagem": "combo-1.jpg",
+    "galeria": [
+      "combo-1.jpg",
+      "combo-3.jpg",
+      "galeria-1.jpg"
+    ]
+  },
+  {
+    "id": 13,
+    "nome": "Combo 2 — Família",
+    "categoria": "combinados",
+    "comboTag": "COMBO 2",
+    "preco": 92.99,
+    "precoAntigo": 115,
+    "promocao": true,
+    "destaqueTag": "PARA COMPARTILHAR",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 135,
+    "descricao": "Perfeito para compartilhar: 10 sashimis variados, 10 uramakis salmão, 8 hot rolls crocantes e 6 niguiris especiais.",
+    "ingredientes": [
+      "10 Sashimis variados",
+      "10 Uramakis de Salmão",
+      "8 Hot Rolls especiais",
+      "6 Niguiris selecionados"
+    ],
+    "porcao": "34 peças (2 a 3 pessoas)",
+    "peso": "750 g",
+    "detalhes": "Fartura e variedade para reuniões em família.",
+    "imagem": "combo-2.jpg",
+    "galeria": [
+      "combo-2.jpg",
+      "combo-4.jpg",
+      "galeria-1.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "nome": "Combo 3 — Especial",
+    "categoria": "combinados",
+    "comboTag": "COMBO 3",
+    "preco": 67.5,
+    "precoAntigo": 80,
+    "promocao": true,
+    "destaqueTag": "PREMIUM",
+    "avaliacao": 5,
+    "avaliacoesQtd": 88,
+    "descricao": "Seleção premium com 6 sashimis trufados com raspas de limão siciliano, 6 dyo de salmão com geleia de pimenta e 8 uramakis especiais.",
+    "ingredientes": [
+      "6 Sashimis trufados",
+      "6 Dyos de salmão com geleia de pimenta",
+      "8 Uramakis especiais"
+    ],
+    "porcao": "20 peças gourmet",
+    "peso": "460 g",
+    "detalhes": "Combinações sofisticadas assinadas pelo chef.",
+    "imagem": "combo-3.jpg",
+    "galeria": [
+      "combo-3.jpg",
+      "combo-1.jpg",
+      "prato-essencia.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "nome": "Combo 4 — Premium",
+    "categoria": "combinados",
+    "comboTag": "COMBO 4",
+    "preco": 127.99,
+    "precoAntigo": 145,
+    "promocao": true,
+    "destaqueTag": "SUPER BANQUETE",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 95,
+    "descricao": "Banquete oriental completo: 16 sashimis nobres, 12 uramakis filadélfia, 10 hot rolls, 8 niguiris maçaricados e 4 dyos especiais.",
+    "ingredientes": [
+      "16 Sashimis nobres (salmão e atum)",
+      "12 Uramakis Filadélfia",
+      "10 Hot Rolls crocantes",
+      "8 Niguiris maçaricados",
+      "4 Dyos especiais"
+    ],
+    "porcao": "50 peças (3 a 4 pessoas)",
+    "peso": "1.100 g",
+    "detalhes": "Ideal para momentos inesquecíveis e grandes celebrações.",
+    "imagem": "combo-4.jpg",
+    "galeria": [
+      "combo-4.jpg",
+      "combo-2.jpg",
+      "galeria-1.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "nome": "Chá Verde Japonês (Gelado)",
+    "categoria": "bebidas",
+    "preco": 9.9,
+    "promocao": false,
+    "destaqueTag": "BEBIDA TRADICIONAL",
+    "avaliacao": 4.7,
+    "avaliacoesQtd": 38,
+    "descricao": "Tradicional chá verde gelado, leve, aromático e altamente refrescante, perfeito para acompanhar sushis.",
+    "ingredientes": [
+      "Infusão de folhas de chá verde japonês (Sencha)",
+      "Água mineral purificada",
+      "Sem adição de açúcares"
+    ],
+    "porcao": "1 garrafa",
+    "peso": "400 ml",
+    "detalhes": "Sabor limpo que limpa o paladar entre os cortes de peixe.",
+    "imagem": "https://images.unsplash.com/photo-1556881286-fc6915169721?w=600&auto=format&fit=crop&q=80",
+    "galeria": [
+      "https://images.unsplash.com/photo-1556881286-fc6915169721?w=600&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": 17,
+    "nome": "Refrigerante Lata 350ml",
+    "categoria": "bebidas",
+    "preco": 7.5,
+    "promocao": false,
+    "destaqueTag": "REFRESCANTE",
+    "avaliacao": 4.8,
+    "avaliacoesQtd": 60,
+    "descricao": "Coca-Cola, Coca Zero, Guaraná Antarctica ou Sprite bem geladinho.",
+    "ingredientes": [
+      "Refrigerante em lata lacrada de 350ml"
+    ],
+    "porcao": "1 lata",
+    "peso": "350 ml",
+    "detalhes": "Enviado bem gelado.",
+    "imagem": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80",
+    "galeria": [
+      "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": 18,
+    "nome": "Cerveja Japonesa Kirin Ichiban",
+    "categoria": "bebidas",
+    "preco": 16.9,
+    "promocao": false,
+    "destaqueTag": "CERVEJA PREMIUM",
+    "avaliacao": 4.9,
+    "avaliacoesQtd": 52,
+    "descricao": "Cerveja puro malte japonesa elaborada exclusivamente com o processo de primeira prensagem (First Press).",
+    "ingredientes": [
+      "Água pura",
+      "Malte de cevada selecionado",
+      "Lúpulo aromático"
+    ],
+    "porcao": "1 garrafa long neck",
+    "peso": "355 ml",
+    "detalhes": "Graduação alcoólica 5,0% vol. Venda proibida para menores de 18 anos.",
+    "imagem": "https://images.unsplash.com/photo-1608270116812-32b005e83ec4?w=600&auto=format&fit=crop&q=80",
+    "galeria": [
+      "https://images.unsplash.com/photo-1608270116812-32b005e83ec4?w=600&auto=format&fit=crop&q=80"
+    ]
+  }
+]

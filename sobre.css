@@ -1,0 +1,1358 @@
+/* ==========================================================================
+   SUSHI HOUSE - SOBRE NÓS (PÁGINA INSTITUCIONAL)
+   Design Sofisticado, Criativo e Inovador inspirado na Culinária Oriental
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. RESET & FUNDO GERAL
+   -------------------------------------------------------------------------- */
+.page-about {
+  background-color: #050505;
+  color: #eaeaea;
+  overflow-x: hidden;
+}
+
+.page-about .app-viewport-wrapper {
+  background: radial-gradient(circle at 50% 10%, rgba(229, 9, 20, 0.05) 0%, transparent 60%),
+              radial-gradient(circle at 90% 40%, rgba(229, 9, 20, 0.03) 0%, transparent 50%),
+              #050505;
+}
+
+/* Títulos com destaque em Vermelho Japonês */
+.section-title-japanese {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.25rem;
+}
+
+.section-title-japanese .text-highlight {
+  color: #e50914;
+  text-shadow: 0 0 20px rgba(229, 9, 20, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO BANNER: SEJA BEM-VINDO (EDGE-TO-EDGE)
+   -------------------------------------------------------------------------- */
+.about-hero-section {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #000000;
+  border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+  overflow: hidden;
+}
+
+.about-hero-banner-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.about-hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Fallback do Hero caso a imagem local não seja encontrada */
+.about-hero-fallback {
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  padding: 4.5rem 0 3.5rem;
+  background: linear-gradient(135deg, rgba(8, 8, 8, 0.98) 0%, rgba(18, 5, 6, 0.95) 100%);
+  position: relative;
+}
+
+.about-hero-fallback::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.18) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.about-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse at 80% 50%, rgba(229, 9, 20, 0.12) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.about-hero-container {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.about-hero-text {
+  max-width: 480px;
+}
+
+.hero-welcome-badge {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+}
+
+.hero-welcome-title {
+  font-family: 'Permanent Marker', 'Cinzel', 'Poppins', cursive, sans-serif;
+  font-size: 3.6rem;
+  font-weight: 900;
+  color: #e50914;
+  letter-spacing: 3px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 4px 25px rgba(229, 9, 20, 0.5), 0 0 10px rgba(229, 9, 20, 0.3);
+  margin-bottom: 1.25rem;
+}
+
+.hero-welcome-desc {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: #c0c0c0;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.hero-welcome-line {
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, #e50914, transparent);
+  border-radius: 2px;
+}
+
+.about-hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-chef-composition {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  border-radius: 18px;
+  overflow: visible;
+}
+
+.hero-chef-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(229, 9, 20, 0.2);
+  display: block;
+}
+
+/* Lanterna Japonesa decorativa */
+.japanese-lantern-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 58px;
+  height: 80px;
+  background: radial-gradient(circle at 50% 30%, #ff3b30 0%, #b30006 80%, #660000 100%);
+  border: 2px solid #ff4d4d;
+  border-radius: 24px / 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(255, 59, 48, 0.65), 0 10px 15px rgba(0,0,0,0.5);
+  animation: lanternGlow 3s ease-in-out infinite alternate;
+  z-index: 3;
+}
+
+.japanese-lantern-badge::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  width: 24px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 3px;
+  border: 1px solid #ff4d4d;
+}
+
+.japanese-lantern-badge::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  width: 24px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 3px;
+  border: 1px solid #ff4d4d;
+}
+
+.japanese-lantern-badge .kanji {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #121212;
+  line-height: 1;
+}
+
+.japanese-lantern-badge .kanji-sub {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 1px;
+}
+
+@keyframes lanternGlow {
+  0% { box-shadow: 0 0 18px rgba(255, 59, 48, 0.5); }
+  100% { box-shadow: 0 0 32px rgba(255, 59, 48, 0.85), 0 0 10px #ff3b30; }
+}
+
+/* --------------------------------------------------------------------------
+   3. NOSSA HISTÓRIA (ULTRA HD & DESIGN CRIATIVO)
+   -------------------------------------------------------------------------- */
+.about-story-section {
+  position: relative;
+  padding: 6.5rem 0 6rem;
+  background: radial-gradient(circle at 15% 45%, rgba(229, 9, 20, 0.12) 0%, transparent 45%),
+              radial-gradient(circle at 85% 65%, rgba(229, 9, 20, 0.08) 0%, transparent 40%),
+              linear-gradient(180deg, #050505 0%, #0a0a0a 50%, #050505 100%);
+  border-bottom: 1px solid rgba(229, 9, 20, 0.15);
+  overflow: hidden;
+}
+
+/* Marca d'água Kanji de Fundo (História) */
+.story-kanji-watermark {
+  position: absolute;
+  top: 10%;
+  right: 6%;
+  font-family: 'Cinzel', serif;
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.018);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  z-index: 0;
+}
+
+/* Pétalas de Sakura Flutuantes Decorativas */
+.sakura-petal {
+  position: absolute;
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(circle at 40% 30%, #ff8090 0%, #e50914 85%);
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  opacity: 0.35;
+  filter: blur(0.5px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sakura-petal.p1 {
+  top: 15%;
+  left: 12%;
+  transform: rotate(25deg);
+  animation: floatPetal1 8s ease-in-out infinite alternate;
+}
+
+.sakura-petal.p2 {
+  bottom: 25%;
+  left: 45%;
+  width: 18px;
+  height: 26px;
+  transform: rotate(-40deg);
+  animation: floatPetal2 11s ease-in-out infinite alternate;
+}
+
+.sakura-petal.p3 {
+  top: 35%;
+  right: 15%;
+  width: 12px;
+  height: 18px;
+  transform: rotate(60deg);
+  animation: floatPetal1 9s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatPetal1 {
+  0% { transform: translateY(0) rotate(20deg); opacity: 0.25; }
+  100% { transform: translateY(25px) rotate(45deg); opacity: 0.55; }
+}
+
+@keyframes floatPetal2 {
+  0% { transform: translateY(0) rotate(-35deg); opacity: 0.3; }
+  100% { transform: translateY(-30px) rotate(-15deg); opacity: 0.6; }
+}
+
+.story-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: 4.5rem;
+}
+
+/* Coluna Visual do Chef HD */
+.story-chef-col {
+  display: flex;
+  justify-content: center;
+}
+
+.chef-card-hd {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+}
+
+.chef-glow-halo {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.28) 0%, transparent 65%);
+  filter: blur(45px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.chef-portrait-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #000000;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(229, 9, 20, 0.25);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.chef-card-hd:hover .chef-portrait-wrap {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), 0 0 45px rgba(229, 9, 20, 0.4);
+  border-color: rgba(229, 9, 20, 0.7);
+}
+
+.chef-portrait-img {
+  width: 100%;
+  height: auto;
+  min-height: 480px;
+  max-height: 580px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Vinheta suave inferior para fundir com a elegância do tema */
+.chef-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.75) 85%, #000000 100%),
+              radial-gradient(circle at 50% 30%, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Selo Hanko Tradicional Japonês */
+.chef-hanko-seal {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 62px;
+  height: 62px;
+  background: #b80008;
+  border: 2px solid #ff4d58;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.6), 0 0 10px rgba(0,0,0,0.8);
+  transform: rotate(6deg);
+  z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+.chef-card-hd:hover .chef-hanko-seal {
+  transform: rotate(0deg) scale(1.08);
+}
+
+.chef-hanko-seal .hanko-kanji {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.chef-hanko-seal .hanko-text {
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 1px;
+}
+
+/* Badge de Experiência */
+.chef-experience-pill {
+  position: absolute;
+  bottom: 22px;
+  left: 20px;
+  background: rgba(12, 12, 12, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(229, 9, 20, 0.5);
+  padding: 0.85rem 1.35rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(229, 9, 20, 0.2);
+  z-index: 3;
+}
+
+.chef-experience-pill .pill-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(229, 9, 20, 0.18);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  color: #e50914;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.chef-experience-pill .pill-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.chef-experience-pill strong {
+  font-size: 1.25rem;
+  color: #ffffff;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.chef-experience-pill span {
+  font-size: 0.72rem;
+  color: #e50914;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Coluna de Conteúdo */
+.story-content-col {
+  padding-left: 0.5rem;
+}
+
+.story-header-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.story-subtitle-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #e50914;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.story-brush-divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #e50914 0%, transparent 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+  margin-top: -0.3rem;
+}
+
+.story-paragraph {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: #b8b8b8;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+}
+
+.story-paragraph.lead-paragraph {
+  font-size: 1.12rem;
+  color: #e0e0e0;
+  line-height: 1.8;
+}
+
+.story-paragraph strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Grid de Estatísticas */
+.story-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.8rem 0;
+}
+
+.stat-card {
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  background: rgba(229, 9, 20, 0.08);
+  border-color: rgba(229, 9, 20, 0.4);
+  transform: translateY(-3px);
+}
+
+.stat-number {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #e50914;
+  line-height: 1.1;
+  text-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: #a0a0a0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0.35rem;
+}
+
+/* Citação / Depoimento do Fundador */
+.story-quote {
+  position: relative;
+  margin-top: 1.8rem;
+  padding: 1.4rem 1.8rem 1.4rem 2rem;
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, rgba(20, 20, 20, 0.95) 100%);
+  border-left: 4px solid #e50914;
+  border-radius: 0 16px 16px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(229, 9, 20, 0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.story-quote .quote-ico {
+  font-size: 1.8rem;
+  color: #e50914;
+  opacity: 0.8;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.quote-body {
+  font-style: italic;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.quote-author {
+  display: block;
+  font-style: normal;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e50914;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.6rem;
+}
+  font-style: italic;
+  color: #f0f0f0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.6;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* --------------------------------------------------------------------------
+   4. NOSSA ESSÊNCIA
+   -------------------------------------------------------------------------- */
+.about-essence-section {
+  position: relative;
+  padding: 5rem 0;
+  background: #070707;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.essence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.essence-content-col {
+  max-width: 520px;
+}
+
+.essence-paragraph {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #b5b5b5;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.essence-values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin-top: 2rem;
+}
+
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.value-item:hover {
+  background: rgba(229, 9, 20, 0.05);
+  border-color: rgba(229, 9, 20, 0.3);
+  transform: translateX(4px);
+}
+
+.value-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(229, 9, 20, 0.15);
+  color: #e50914;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.value-item h4 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.value-item span {
+  font-size: 0.85rem;
+  color: #999999;
+  line-height: 1.4;
+}
+
+.essence-visual-col {
+  display: flex;
+  justify-content: center;
+}
+
+.essence-visual-card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+}
+
+.calligraphy-stamp {
+  position: absolute;
+  top: -25px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: 'Permanent Marker', cursive, sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  transform: rotate(-8deg);
+  z-index: 2;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+}
+
+.calligraphy-stamp .stamp-word {
+  font-size: 1.15rem;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+}
+
+.essence-dish-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid rgba(229, 9, 20, 0.25);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(229, 9, 20, 0.15);
+  transition: transform 0.4s ease;
+}
+
+.essence-visual-card:hover .essence-dish-img {
+  transform: scale(1.02);
+}
+
+/* --------------------------------------------------------------------------
+   5. NOSSO AMBIENTE (COLAGEM 3 FOTOS)
+   -------------------------------------------------------------------------- */
+.about-ambient-section {
+  position: relative;
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #070707 0%, #0c0c0c 50%, #070707 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ambient-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.ambient-content-col {
+  max-width: 480px;
+}
+
+.ambient-paragraph {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #b5b5b5;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.ambient-features-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(26, 26, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #d0d0d0;
+  transition: all 0.25s ease;
+}
+
+.tag-pill i {
+  color: #e50914;
+}
+
+.tag-pill:hover {
+  border-color: #e50914;
+  color: #ffffff;
+  background: rgba(229, 9, 20, 0.1);
+}
+
+/* Colagem de Fotos */
+.collage-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.collage-main-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+
+.collage-main-card .collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collage-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.collage-stack-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 380px;
+}
+
+.collage-small-card {
+  position: relative;
+  flex: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.collage-small-card .collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.collage-main-card:hover .collage-img,
+.collage-small-card:hover .collage-img {
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   6. GALERIA (CARROSSEL DINÂMICO & INTERATIVO)
+   -------------------------------------------------------------------------- */
+.about-gallery-section {
+  position: relative;
+  padding: 5rem 0 5.5rem;
+  background: #050505;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.gallery-subtitle {
+  font-size: 1.05rem;
+  color: #888888;
+  margin-top: -0.5rem;
+  margin-bottom: 2.8rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.gallery-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.gallery-carousel-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.9);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  z-index: 5;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-carousel-arrow:hover {
+  background: #e50914;
+  border-color: #ff3b30;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+  transform: scale(1.1);
+}
+
+.gallery-carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px 4px;
+}
+
+.gallery-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.gallery-card {
+  flex: 0 0 calc((100% - 3rem) / 3);
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s ease;
+  user-select: none;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(229, 9, 20, 0.55);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(229, 9, 20, 0.3);
+}
+
+.gallery-img-box {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(229, 9, 20, 0.88) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #ffffff;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.gallery-overlay i {
+  font-size: 1.8rem;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.gallery-overlay span {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.gallery-overlay-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.gallery-card:hover .gallery-img {
+  transform: scale(1.08);
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-card:hover .gallery-overlay i,
+.gallery-card:hover .gallery-overlay span,
+.gallery-card:hover .gallery-overlay-sub {
+  transform: translateY(0);
+}
+
+/* Dots do Carrossel */
+.gallery-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.gallery-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.gallery-dot.active {
+  width: 28px;
+  border-radius: 10px;
+  background: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   7. BANNER DE CITAÇÃO ORIENTAL (FILOSOFIA SUSHI HOUSE)
+   -------------------------------------------------------------------------- */
+.about-quote-banner-section {
+  position: relative;
+  width: 100%;
+  padding: 5rem 0;
+  background: radial-gradient(circle at 85% 50%, rgba(229, 9, 20, 0.12) 0%, transparent 50%),
+              linear-gradient(135deg, #050505 0%, #0a0808 60%, #120406 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+  overflow: hidden;
+}
+
+.quote-banner-container {
+  position: relative;
+  z-index: 2;
+}
+
+.quote-banner-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.quote-text-col {
+  max-width: 540px;
+}
+
+.quote-banner-phrase {
+  font-family: 'Cinzel', 'Poppins', serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.65;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+  margin-bottom: 1.5rem;
+}
+
+.quote-accent-bar {
+  width: 75px;
+  height: 3px;
+  background: #e50914;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+}
+
+.quote-visual-col {
+  display: flex;
+  justify-content: center;
+}
+
+.quote-img-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 30px rgba(229, 9, 20, 0.18);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.quote-img-frame:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229, 9, 20, 0.6);
+}
+
+.quote-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.quote-img-frame:hover .quote-visual-img {
+  transform: scale(1.05);
+}
+
+.quote-img-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.7) 100%),
+              radial-gradient(circle at 30% 30%, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   8. LIGHTBOX MODAL
+   -------------------------------------------------------------------------- */
+.modal-lightbox-dialog {
+  max-width: 800px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.lightbox-img-wrap {
+  position: relative;
+  background: #000000;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(229, 9, 20, 0.3);
+}
+
+.lightbox-img-wrap img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(14, 14, 14, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(229, 9, 20, 0.9);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.lightbox-close:hover {
+  background: #ff1f2d;
+  transform: scale(1.1);
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVIDADE (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .about-hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .about-hero-text {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .hero-welcome-line {
+    margin: 0 auto;
+  }
+
+  .hero-welcome-title {
+    font-size: 3rem;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .story-content-col {
+    padding-left: 0;
+  }
+
+  .essence-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .essence-content-col {
+    max-width: 100%;
+  }
+
+  .essence-values-list {
+    text-align: left;
+  }
+
+  .ambient-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .ambient-content-col {
+    max-width: 100%;
+  }
+
+  .ambient-features-tags {
+    justify-content: center;
+  }
+
+  .gallery-card {
+    flex: 0 0 calc((100% - 1.5rem) / 2);
+  }
+
+  .quote-banner-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .quote-text-col {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .quote-accent-bar {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-welcome-badge {
+    font-size: 1.7rem;
+  }
+
+  .hero-welcome-title {
+    font-size: 2.4rem;
+  }
+
+  .section-title-japanese {
+    font-size: 1.8rem;
+  }
+
+  .hero-chef-img {
+    height: 240px;
+  }
+
+  .collage-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .collage-main-card {
+    height: 240px;
+  }
+
+  .collage-stack-col {
+    height: auto;
+    flex-direction: row;
+  }
+
+  .collage-small-card {
+    height: 160px;
+  }
+
+  .gallery-card {
+    flex: 0 0 100%;
+  }
+
+  .gallery-carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .quote-banner-phrase {
+    font-size: 1.2rem;
+  }
+
+  .chef-portrait-wrap {
+    max-width: 320px;
+  }
+
+  .chef-portrait-img {
+    min-height: 380px;
+    max-height: 440px;
+  }
+
+  .story-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .stat-card {
+    padding: 0.75rem 0.4rem;
+  }
+
+  .stat-number {
+    font-size: 1.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
+  }
+
+  .story-brush-divider {
+    margin: 0.5rem auto 1.2rem;
+  }
+
+  .story-quote {
+    flex-direction: column;
+    text-align: left;
+    padding: 1.2rem;
+  }
+}

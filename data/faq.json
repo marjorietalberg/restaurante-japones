@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "pergunta": "É necessário fazer reserva para jantar no restaurante?",
+    "resposta": "Recomendamos a realização de reservas, especialmente para os fins de semana e noites com maior movimento, para garantir que desfruta da nossa experiência única com todo o conforto e sem tempo de espera."
+  },
+  {
+    "id": 2,
+    "pergunta": "O restaurante dispõe de opções vegetarianas ou adaptadas a restrições alimentares?",
+    "resposta": "Sim! Dispomos de opções vegetarianas, veganas (como hossomakis de pepino, manga e shimeji na manteiga) e pratos adaptáveis para celíacos sem glúten (com shoyu especial)."
+  },
+  {
+    "id": 3,
+    "pergunta": "Qual é o tempo médio de entrega dos pedidos no delivery?",
+    "resposta": "Nosso tempo médio é de 35 a 50 minutos. Cada pedido é montado artesanalmente apenas após a confirmação para garantir frescor absoluto."
+  },
+  {
+    "id": 4,
+    "pergunta": "Quais são as formas de pagamento aceitas pelo aplicativo?",
+    "resposta": "Aceitamos PIX instantâneo com confirmação em tempo real, cartões de crédito e débito das principais bandeiras e pagamento na entrega."
+  }
+]
